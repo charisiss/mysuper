@@ -4,15 +4,14 @@ import { Product } from "@/types/Product";
 import ProductList from "@/components/ProductList";
 import ProductModal from "@/components/ProductModal";
 import {
-  Box,
-  Button,
-  TextField,
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  TextField,
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Image from "next/image";
 
 const Home: React.FC = () => {
   const [availableProducts, setAvailableProducts] = useState<Product[]>([
@@ -24,7 +23,7 @@ const Home: React.FC = () => {
   const [offerList, setOfferList] = useState<Product[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | undefined>(
-    undefined
+    undefined,
   );
   const [searchTerm, setSearchTerm] = useState("");
   const [expanded, setExpanded] = useState<string | false>("shopping");
@@ -39,43 +38,30 @@ const Home: React.FC = () => {
   const handleAddToList = (
     product: Product,
     listType: "shopping" | "offer",
-    quantity: number
+    quantity: number,
   ) => {
     const productWithQuantity = { ...product, quantity };
+    const updateList = (prev: Product[]) => {
+      const existingProductIndex = prev.findIndex(
+        (p) => p.id === productWithQuantity.id,
+      );
+      if (existingProductIndex > -1) {
+        const updatedList = [...prev];
+        updatedList[existingProductIndex] = {
+          ...updatedList[existingProductIndex],
+          quantity: updatedList[existingProductIndex].quantity
+            ? updatedList[existingProductIndex].quantity + quantity
+            : quantity,
+        };
+        return updatedList;
+      }
+      return [...prev, productWithQuantity];
+    };
+
     if (listType === "shopping") {
-      setShoppingList((prev) => {
-        const existingProductIndex = prev.findIndex(
-          (p) => p.id === productWithQuantity.id
-        );
-        if (existingProductIndex > -1) {
-          const updatedList = [...prev];
-          updatedList[existingProductIndex] = {
-            ...updatedList[existingProductIndex],
-            quantity: updatedList[existingProductIndex].quantity
-              ? updatedList[existingProductIndex].quantity + quantity
-              : quantity,
-          };
-          return updatedList;
-        }
-        return [...prev, productWithQuantity];
-      });
+      setShoppingList(updateList);
     } else {
-      setOfferList((prev) => {
-        const existingProductIndex = prev.findIndex(
-          (p) => p.id === productWithQuantity.id
-        );
-        if (existingProductIndex > -1) {
-          const updatedList = [...prev];
-          updatedList[existingProductIndex] = {
-            ...updatedList[existingProductIndex],
-            quantity: updatedList[existingProductIndex].quantity
-              ? updatedList[existingProductIndex].quantity + quantity
-              : quantity,
-          };
-          return updatedList;
-        }
-        return [...prev, productWithQuantity];
-      });
+      setOfferList(updateList);
     }
   };
 
@@ -86,14 +72,17 @@ const Home: React.FC = () => {
 
   const handleDeleteProduct = (
     product: Product,
-    fromList: "available" | "shopping" | "offer"
+    fromList: "available" | "shopping" | "offer",
   ) => {
+    const updateList = (prev: Product[]) =>
+      prev.filter((p) => p.id !== product.id);
+
     if (fromList === "available") {
-      setAvailableProducts((prev) => prev.filter((p) => p.id !== product.id));
+      setAvailableProducts(updateList);
     } else if (fromList === "shopping") {
-      setShoppingList((prev) => prev.filter((p) => p.id !== product.id));
+      setShoppingList(updateList);
     } else if (fromList === "offer") {
-      setOfferList((prev) => prev.filter((p) => p.id !== product.id));
+      setOfferList(updateList);
     }
   };
 
@@ -103,21 +92,16 @@ const Home: React.FC = () => {
   };
 
   const handleSaveProduct = (product: Product) => {
+    const updateProduct = (prev: Product[]) =>
+      prev.map((p) => (p.id === product.id ? product : p));
+
     if (currentProduct) {
-      // Edit existing product
-      setAvailableProducts((prev) =>
-        prev.map((p) => (p.id === product.id ? product : p))
-      );
-      setShoppingList((prev) =>
-        prev.map((p) => (p.id === product.id ? product : p))
-      );
-      setOfferList((prev) =>
-        prev.map((p) => (p.id === product.id ? product : p))
-      );
+      setAvailableProducts(updateProduct);
+      setShoppingList(updateProduct);
+      setOfferList(updateProduct);
     } else {
-      // Add new product
       if (!product.id) {
-        product.id = Date.now(); // Αυτόματη δημιουργία ID αν δεν υπάρχει
+        product.id = Date.now();
       }
       setAvailableProducts((prev) => [...prev, product]);
     }
@@ -129,31 +113,51 @@ const Home: React.FC = () => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredProducts = availableProducts.filter(
-    (product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.id.toString().includes(searchTerm)
+  const normalizeString = (str: string) => {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  };
+
+  const filteredProducts = availableProducts.filter((product) =>
+    [normalizeString(product.name), product.id.toString()].some((term) =>
+      term.includes(normalizeString(searchTerm)),
+    ),
   );
 
   return (
     <div className="p-5">
       <div className="pb-5">
-        <div className="flex gap-2 pb-5 w-full items-center justify-between">
-          <h1 className="text-xl font-bold">ΛΙΣΤΕΣ</h1>
+        <div className="flex w-full items-center justify-start gap-2 pb-5">
+          <span className="h-12 w-12">
+            <Image
+              src={"/images/productslist.png"}
+              alt="My Super Image"
+              width={50}
+              height={50}
+            />
+          </span>
+          <h1 className="text-xl font-bold">LISTS</h1>
         </div>
 
-        {/* Accordion for Shopping List */}
         <Accordion
           expanded={expanded === "shopping"}
           onChange={() =>
             setExpanded(expanded === "shopping" ? false : "shopping")
           }
-          sx={{ margin: 0 }}
+          className="rounded-t-2xl"
+          sx={{
+            "&:before": {
+              display: "none",
+            },
+          }}
+          disableGutters
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Λίστα Αγορών</Typography>
+            <Typography>Shopping List</Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ padding: 0 }}>
             <ProductList
               products={shoppingList}
               totalCost={calculateTotalCost(shoppingList)}
@@ -166,15 +170,21 @@ const Home: React.FC = () => {
           </AccordionDetails>
         </Accordion>
 
-        {/* Accordion for Offer List */}
         <Accordion
           expanded={expanded === "offer"}
           onChange={() => setExpanded(expanded === "offer" ? false : "offer")}
+          className="rounded-b-2xl"
+          sx={{
+            "&:before": {
+              display: "none",
+            },
+          }}
+          disableGutters
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Λίστα Προσφορών</Typography>
+            <Typography>Offers List</Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ padding: 0 }}>
             <ProductList
               products={offerList}
               totalCost={calculateTotalCost(offerList)}
@@ -187,17 +197,25 @@ const Home: React.FC = () => {
           </AccordionDetails>
         </Accordion>
 
-        <div className="flex gap-2 pt-5 w-full items-center justify-between">
-          <h1 className="text-xl font-bold">ΠΡΟΙΟΝΤΑ</h1>
+        <div className="flex w-full items-center justify-between gap-2 pt-5">
+          <span className="flex items-center gap-2">
+            <Image
+              src={"/images/mysuper.png"}
+              alt="My Super Image"
+              width={50}
+              height={50}
+            />
+            <h1 className="text-xl font-bold">PRODUCTS</h1>
+          </span>
           <button
             onClick={() => setModalOpen(true)}
-            className="bg-[#00d6d6] p-2 rounded-lg uppercase text-white font-bold"
+            className="bg-primary rounded-lg px-4 py-2 font-bold uppercase text-white"
           >
-            Προσθηκη
+            ADD
           </button>
         </div>
         <TextField
-          label="Αναζήτηση"
+          label="Search"
           variant="outlined"
           fullWidth
           margin="normal"
@@ -205,7 +223,6 @@ const Home: React.FC = () => {
           onChange={handleSearchChange}
         />
 
-        {/* Available Products List */}
         <ProductList
           products={filteredProducts}
           onEdit={handleEditProduct}
@@ -216,7 +233,6 @@ const Home: React.FC = () => {
           totalCost={0}
         />
 
-        {/* Product Modal */}
         <ProductModal
           open={modalOpen}
           onClose={() => setModalOpen(false)}

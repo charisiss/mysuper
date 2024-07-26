@@ -11,8 +11,11 @@ const config: Config = {
       fontFamily: {
         manrope: ["Manrope", "sans-serif"],
       },
+      colors: {
+        primary: "#00d6d6",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animated")],
 };
 export default config;

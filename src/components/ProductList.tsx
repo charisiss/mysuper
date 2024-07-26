@@ -1,38 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Product } from "@/types/Product";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  IconButton,
-  Menu,
-  MenuItem,
-  Checkbox,
-  Modal,
-  Box,
-  Typography,
-  Button,
-  TextField,
-} from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { IconButton, Checkbox, Menu, MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import ClearIcon from "@mui/icons-material/Clear";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Image from "next/image";
 
 interface ProductListProps {
   products: Product[];
-  totalCost: number; // Added total cost prop
+  totalCost: number;
   onEdit: (product: Product) => void;
   onDelete: (
     product: Product,
-    fromList: "available" | "shopping" | "offer"
+    fromList: "available" | "shopping" | "offer",
   ) => void;
   onMoveToOffers: (product: Product) => void;
   onAddToList: (
     product: Product,
     listType: "shopping" | "offer",
-    quantity: number
+    quantity: number,
   ) => void;
-  currentList: "shopping" | "offer" | "available"; // Added prop to indicate current list
+  currentList: "shopping" | "offer" | "available";
 }
 
 const ProductList: React.FC<ProductListProps> = ({
@@ -47,37 +36,78 @@ const ProductList: React.FC<ProductListProps> = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedProduct, setSelectedProduct] = useState<null | Product>(null);
   const [listModalOpen, setListModalOpen] = useState(false);
-  const [quantity, setQuantity] = useState<number>(1); // State for quantity
+  const [quantity, setQuantity] = useState<number>(1);
+  const [checkedProducts, setCheckedProducts] = useState<Set<number>>(
+    new Set(),
+  );
+  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const [selectedProductForMenu, setSelectedProductForMenu] =
+    useState<null | Product>(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const handleMenuOpen = (
-    event: React.MouseEvent<HTMLElement>,
-    product: Product
-  ) => {
-    setAnchorEl(event.currentTarget);
-    setSelectedProduct(product);
-  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        setListModalOpen(false);
+      }
+    };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    setSelectedProduct(null);
-  };
+    if (listModalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [listModalOpen]);
 
   const handleEdit = () => {
-    if (selectedProduct) {
-      onEdit(selectedProduct);
+    if (selectedProductForMenu) {
+      onEdit(selectedProductForMenu);
     }
     handleMenuClose();
   };
 
+  const handleDeleteFromMenu = () => {
+    if (selectedProductForMenu) {
+      onDelete(selectedProductForMenu, currentList);
+    }
+    handleMenuClose();
+  };
+
+  const handleMenuOpen = (
+    event: React.MouseEvent<HTMLElement>,
+    product: Product,
+  ) => {
+    setMenuAnchorEl(event.currentTarget);
+    setSelectedProductForMenu(product);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
+    setSelectedProductForMenu(null);
+  };
+
   const handleCheckboxChange = (product: Product) => {
-    if (currentList === "available") {
-      // If the product is only in the "Available Products" list, open the modal
-      setSelectedProduct(product);
-      setQuantity(1); // Reset quantity to 1 when opening the modal
-      setListModalOpen(true);
+    if (currentList !== "available") {
+      setCheckedProducts((prev) => {
+        const newCheckedProducts = new Set(prev);
+        if (newCheckedProducts.has(product.id)) {
+          newCheckedProducts.delete(product.id);
+        } else {
+          newCheckedProducts.add(product.id);
+        }
+        return newCheckedProducts;
+      });
     } else {
-      // If the product is in another list, remove it from that list
-      onDelete(product, currentList);
+      setSelectedProduct(product);
+      setQuantity(1);
+      setListModalOpen(true);
     }
   };
 
@@ -90,142 +120,176 @@ const ProductList: React.FC<ProductListProps> = ({
   };
 
   const handleDeleteFromList = (
-    listType: "available" | "shopping" | "offer"
+    otherProduct?: Product,
+    otherCurrentList?: "available" | "shopping" | "offer",
   ) => {
+    if (otherProduct && otherCurrentList) {
+      onDelete(otherProduct, otherCurrentList);
+    }
     if (selectedProduct) {
-      onDelete(selectedProduct, listType);
+      onDelete(selectedProduct, currentList);
     }
     setListModalOpen(false);
   };
 
-  // Utility function to format price safely
+  const handleClearList = () => {
+    products.forEach((product) => onDelete(product, currentList));
+    setCheckedProducts(new Set());
+  };
+
   const formatPrice = (price: any) => {
     return typeof price === "number" ? price.toFixed(2) : "0.00";
   };
 
   return (
     <>
-      <List>
+      <ul className="divide-y divide-gray-200">
         {products.map((product) => {
           const productQuantity = product.quantity || 1;
           return (
-            <ListItem key={product.id}>
-              <Checkbox
-                edge="start"
-                checked={currentList !== "available"} // Checkbox is checked if not in "available" list
-                onChange={() => handleCheckboxChange(product)}
-              />
-              <ListItemText
-                primary={
-                  <>
-                    {product.name}{" "}
-                    {productQuantity > 1 && `x${productQuantity}`}
-                  </>
-                }
-                secondary={`Τιμή: ${formatPrice(
-                  product.price * productQuantity
-                )}€`}
-              />
-              {currentList !== "shopping" && currentList !== "offer" && (
+            <li
+              key={product.id}
+              className={`flex items-center justify-between py-4 hover:bg-gray-100 ${currentList !== "available" ? "cursor-default" : ""}`}
+              onClick={() => handleCheckboxChange(product)}
+            >
+              <div className="flex items-center space-x-4">
+                {currentList !== "available" && (
+                  <Checkbox
+                    checked={checkedProducts.has(product.id)}
+                    className="accent-primary"
+                  />
+                )}
+                <div>
+                  <p className="font-semibold">
+                    {productQuantity > 1 && `${productQuantity}x `}
+                    {product.name}
+                  </p>
+                  <p className="flex items-center text-sm text-gray-500">
+                    {formatPrice(product.price * productQuantity)}€
+                  </p>
+                </div>
+              </div>
+              {currentList === "available" && (
+                <div className="flex items-center space-x-2">
+                  <IconButton
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleMenuOpen(e, product);
+                    }}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                </div>
+              )}
+              {currentList !== "available" && (
                 <IconButton
-                  edge="end"
-                  onClick={(event) => handleMenuOpen(event, product)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteFromList(product, currentList);
+                  }}
+                  className="text-gray-500 hover:text-gray-700"
                 >
-                  <MoreVertIcon />
+                  <RemoveIcon />
                 </IconButton>
               )}
-              <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-              >
-                <MenuItem onClick={handleEdit}>Edit</MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    if (selectedProduct) {
-                      const fromList =
-                        products.find((p) => p.id === selectedProduct.id)
-                          ?.fromList || "available";
-                      handleDeleteFromList(fromList);
-                    }
-                  }}
-                >
-                  Delete
-                </MenuItem>
-              </Menu>
-            </ListItem>
+            </li>
           );
         })}
-      </List>
+      </ul>
 
       {currentList !== "available" && (
-        <Typography variant="h6" sx={{ marginTop: 2 }}>
-          Σύνολο: {formatPrice(totalCost)}€
-        </Typography>
+        <div
+          className={`mt-4 flex items-center justify-around bg-gray-200 p-2 ${currentList === "offer" && "rounded-b-2xl"}`}
+        >
+          <p className="w-full text-xl font-semibold text-black">
+            Total: {formatPrice(totalCost)}€
+          </p>
+          {products.length > 0 && (
+            <ClearIcon className="w-10" onClick={handleClearList} />
+          )}
+        </div>
       )}
 
-      <Modal open={listModalOpen} onClose={() => setListModalOpen(false)}>
-        <Box
-          sx={{
-            padding: 4,
-            backgroundColor: "white",
-            margin: "auto",
-            marginTop: "10%",
-            borderRadius: 2,
-            width: 300,
-          }}
+      {listModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          onClick={() => setListModalOpen(false)}
         >
-          <Typography variant="h6" gutterBottom>
-            {selectedProduct?.name}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Τιμή: {formatPrice(selectedProduct?.price || 0)}€
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Συνολικό Κόστος:
-            {formatPrice((selectedProduct?.price || 0) * quantity)}€
-          </Typography>
-          <div className="flex justify-center">
-            <Box sx={{ display: "flex", alignItems: "center", marginTop: 2 }}>
-              <IconButton
+          <div
+            ref={modalRef}
+            className="animate-fade-up animate-once animate-duration-500 animate-ease-in-out w-80 rounded-lg bg-white p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className="flex items-center gap-2">
+              <Image
+                src={"/images/mysuper.png"}
+                alt="My Super Image"
+                width={50}
+                height={50}
+              />
+              <span className="flex flex-col">
+                <h2 className="text-2xl font-bold">{selectedProduct?.name}</h2>
+                <p className="">{formatPrice(selectedProduct?.price || 0)}€</p>
+              </span>
+            </span>
+
+            {/* QUANTITY */}
+            <div className="mb-4 mt-8 flex items-center justify-center">
+              <span className="mr-2 flex h-12 w-full items-center justify-center gap-1 rounded-lg border border-gray-300 p-2 text-center">
+                <p>Total:</p>
+                <p className="font-bold">
+                  {formatPrice((selectedProduct?.price || 0) * quantity)}€
+                </p>
+              </span>
+              <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                aria-label="Decrease quantity"
+                className="h-12 rounded-l-lg border border-gray-300 p-2"
               >
                 <RemoveIcon />
-              </IconButton>
-              <TextField
+              </button>
+              <input
                 type="number"
-                variant="outlined"
-                margin="normal"
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
-                inputProps={{ min: 1 }}
-                sx={{ width: 80, textAlign: "center" }}
+                className="h-12 w-10 border-y border-gray-300 p-2 text-center"
               />
-              <IconButton
+              <button
                 onClick={() => setQuantity(quantity + 1)}
-                aria-label="Increase quantity"
+                className="h-12 rounded-r-lg border border-gray-300 p-2"
               >
                 <AddIcon />
-              </IconButton>
-            </Box>
+              </button>
+            </div>
+
+            {/* BUTTONS */}
+            <div className="flex w-full flex-col gap-2">
+              <button
+                className="bg-primary border-primary w-full rounded-lg border px-4 py-2 font-bold uppercase text-white"
+                onClick={() => handleAddToList("shopping")}
+              >
+                ADD TO SHOPPING LIST
+              </button>
+              <button
+                className="w-full rounded-lg bg-gray-200 px-4 py-2 font-medium uppercase text-black"
+                onClick={() => handleAddToList("offer")}
+              >
+                ADD TO OFFERS LIST
+              </button>
+            </div>
           </div>
-          <div className="flex gap-2.5 mt-5">
-            <button
-              className="bg-[#00d6d6] px-2 py-3 h-full w-full rounded-lg uppercase text-md text-white font-bold"
-              onClick={() => handleAddToList("shopping")}
-            >
-              ΑΓΟΡΕΣ
-            </button>
-            <button
-              className="text-black border h-full py-3 border-[#00d6d6] px-2 w-full rounded-lg uppercase text-md font-medium"
-              onClick={() => handleAddToList("offer")}
-            >
-              ΠΡΟΣΦΟΡΕΣ
-            </button>
-          </div>
-        </Box>
-      </Modal>
+        </div>
+      )}
+
+      {/* MoreVert Menu */}
+      <Menu
+        anchorEl={menuAnchorEl}
+        open={Boolean(menuAnchorEl)}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <MenuItem onClick={handleDeleteFromMenu}>Delete</MenuItem>
+      </Menu>
     </>
   );
 };
