@@ -17,7 +17,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
   initialProduct,
 }) => {
   const [product, setProduct] = useState<Product>({
-    id: 0,
+    id: "",
     name: "",
     price: 0,
     fromList: "available",
@@ -29,7 +29,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
     if (initialProduct) {
       setProduct(initialProduct);
     } else {
-      setProduct({ id: Date.now(), name: "", price: 0, fromList: "available" });
+      setProduct({ id: "", name: "", price: 0, fromList: "available" });
     }
   }, [initialProduct]);
 
@@ -70,7 +70,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div
         ref={modalRef}
-        className="animate-fade-up animate-once animate-duration-500 animate-ease-in-out w-80 rounded-lg bg-white p-8"
+        className="w-80 animate-fade-up rounded-lg bg-white p-8 animate-duration-500 animate-once animate-ease-in-out"
       >
         <div className="mb-5 flex items-center gap-2">
           <Image
@@ -114,7 +114,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
 
         <button
           onClick={handleSave}
-          className="bg-primary mt-4 w-full rounded-lg p-4 font-bold uppercase text-white"
+          className="mt-4 w-full rounded-lg bg-primary p-4 font-bold uppercase text-white"
         >
           SAVE
         </button>
