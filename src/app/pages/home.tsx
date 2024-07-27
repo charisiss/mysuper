@@ -44,7 +44,7 @@ const Home: React.FC = () => {
     const fetchProducts = async () => {
       const querySnapshot = await getDocs(collection(db, "products"));
       const products = querySnapshot.docs.map((doc) => {
-        const data = doc.data() as Omit<Product, "id">; // Exclude id from Firestore data
+        const data = doc.data() as Omit<Product, "id">;
         return {
           ...data,
           id: doc.id,

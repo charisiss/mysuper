@@ -37,7 +37,7 @@ const ProductList: React.FC<ProductListProps> = ({
   const [selectedProduct, setSelectedProduct] = useState<null | Product>(null);
   const [listModalOpen, setListModalOpen] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
-  const [checkedProducts, setCheckedProducts] = useState<Set<number>>(
+  const [checkedProducts, setCheckedProducts] = useState<Set<string>>(
     new Set(),
   );
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);

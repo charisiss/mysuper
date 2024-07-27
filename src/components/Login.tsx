@@ -1,23 +1,31 @@
-// components/Login.tsx
 import React from "react";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, User } from "firebase/auth";
 import { auth, googleProvider } from "@/app/firebaseConfig";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useAuth } from "@/app/AuthContext"; // Adjust the path to where your authContext is located
 
-const Login: React.FC = () => {
+interface LoginProps {
+  onLogin?: (user: User | null) => void; // Define the prop type
+}
+
+const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const router = useRouter();
+  const { setUser } = useAuth();
 
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      // This gives you a Google Access Token. You can use it to access Google APIs.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-
-      // The signed-in user info.
       const user = result.user;
       console.log(user); // For debugging
+
+      // Update the user state
+      setUser(user);
+
+      // Call the onLogin function if it is provided
+      if (onLogin) {
+        onLogin(user);
+      }
 
       // Redirect to home or other page after successful login
       router.push("/");
