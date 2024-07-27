@@ -18,6 +18,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
 }) => {
   const [product, setProduct] = useState<Product>({
     id: "",
+    barcode: 0,
     name: "",
     price: 0,
     fromList: "available",
@@ -26,12 +27,20 @@ const ProductModal: React.FC<ProductModalProps> = ({
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (initialProduct) {
-      setProduct(initialProduct);
-    } else {
-      setProduct({ id: "", name: "", price: 0, fromList: "available" });
+    if (open) {
+      if (initialProduct) {
+        setProduct(initialProduct);
+      } else {
+        setProduct({
+          id: "",
+          barcode: 0,
+          name: "",
+          price: 0,
+          fromList: "available",
+        });
+      }
     }
-  }, [initialProduct]);
+  }, [open, initialProduct]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -91,7 +100,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
           value={product.id}
           onChange={handleChange}
           margin="normal"
-          type="number"
+          type="text"
           disabled={!!initialProduct}
         />
         <TextField

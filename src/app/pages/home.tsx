@@ -65,6 +65,11 @@ const Home: React.FC = () => {
     }, 0);
   };
 
+  const handleAddProduct = () => {
+    setCurrentProduct(undefined);
+    setModalOpen(true);
+  };
+
   const handleAddToList = async (
     product: Product,
     listType: "shopping" | "offer",
@@ -273,7 +278,7 @@ const Home: React.FC = () => {
             <h1 className="text-xl font-bold">PRODUCTS</h1>
           </span>
           <button
-            onClick={() => setModalOpen(true)}
+            onClick={handleAddProduct}
             className="rounded-lg bg-primary px-4 py-2 font-bold uppercase text-white"
           >
             ADD
