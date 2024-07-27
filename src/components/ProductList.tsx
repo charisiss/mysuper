@@ -159,7 +159,7 @@ const ProductList: React.FC<ProductListProps> = ({
                     className="accent-primary"
                   />
                 )}
-                <div>
+                <div className={`${currentList == "available" && "pl-1"}`}>
                   <p className="font-semibold">
                     {productQuantity > 1 && `${productQuantity}x `}
                     {product.name}
@@ -218,7 +218,7 @@ const ProductList: React.FC<ProductListProps> = ({
         >
           <div
             ref={modalRef}
-            className="animate-fade-up animate-once animate-duration-500 animate-ease-in-out w-80 rounded-lg bg-white p-8"
+            className="w-80 animate-fade-up rounded-lg bg-white p-8 animate-duration-500 animate-once animate-ease-in-out"
             onClick={(e) => e.stopPropagation()}
           >
             <span className="flex items-center gap-2">
@@ -265,7 +265,7 @@ const ProductList: React.FC<ProductListProps> = ({
             {/* BUTTONS */}
             <div className="flex w-full flex-col gap-2">
               <button
-                className="bg-primary border-primary w-full rounded-lg border px-4 py-2 font-bold uppercase text-white"
+                className="w-full rounded-lg border border-primary bg-primary px-4 py-2 font-bold uppercase text-white"
                 onClick={() => handleAddToList("shopping")}
               >
                 ADD TO SHOPPING LIST

@@ -1,11 +1,10 @@
 import { AppProps } from "next/app";
-import Layout from "@/app/layout";
-import Home from "@/app/pages/home";
+import Layout from "../layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
-      <Home />
+      <Component {...pageProps} />
     </Layout>
   );
 }

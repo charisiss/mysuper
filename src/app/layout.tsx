@@ -1,25 +1,19 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// layout.tsx
+import React from "react";
+import { AuthProvider } from "./AuthContext";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "My Super Market App",
-  description: "Created By Charisis Samaras",
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <AuthProvider>
+      <html lang="en">
+        <head>
+          <link rel="icon" href="/images/mysuper.png" />
+        </head>
+        <body>{children}</body>
+      </html>
+    </AuthProvider>
+  );
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="images/mysuper.png" />
-      </head>
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
-}
+export default Layout;
