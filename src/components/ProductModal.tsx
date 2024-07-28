@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { TextField } from "@mui/material";
+import { TextField, IconButton } from "@mui/material";
 import { Product } from "@/types/Product";
 import Image from "next/image";
+import { BrowserMultiFormatReader, IScannerControls } from "@zxing/browser";
+import QrCodeScannerRoundedIcon from "@mui/icons-material/QrCodeScannerRounded";
 
 interface ProductModalProps {
   open: boolean;
@@ -23,6 +25,10 @@ const ProductModal: React.FC<ProductModalProps> = ({
     price: 0,
     fromList: "available",
   });
+
+  const [isScanning, setIsScanning] = useState<boolean>(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const controlsRef = useRef<IScannerControls | null>(null);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -73,6 +79,38 @@ const ProductModal: React.FC<ProductModalProps> = ({
     };
   }, [open, onClose]);
 
+  const handleScan = async () => {
+    if (isScanning) {
+      // Stop scanning
+      controlsRef.current?.stop();
+      setIsScanning(false);
+    } else {
+      // Start scanning
+      setIsScanning(true);
+
+      const codeReader = new BrowserMultiFormatReader();
+      const videoInputDevices =
+        await BrowserMultiFormatReader.listVideoInputDevices();
+      if (videoInputDevices.length > 0) {
+        codeReader.decodeFromVideoDevice(
+          videoInputDevices[0].deviceId,
+          videoRef.current!,
+          (result, err, controls) => {
+            if (result) {
+              const barcodeNumber = parseInt(result.getText(), 10);
+              if (!isNaN(barcodeNumber)) {
+                setProduct((prev) => ({ ...prev, barcode: barcodeNumber }));
+              }
+              controls.stop();
+              setIsScanning(false);
+            }
+            controlsRef.current = controls;
+          },
+        );
+      }
+    }
+  };
+
   if (!open) return null;
 
   return (
@@ -93,16 +131,28 @@ const ProductModal: React.FC<ProductModalProps> = ({
           </h6>
         </div>
 
-        <TextField
-          fullWidth
-          label="Barcode"
-          name="barcode"
-          value={product.barcode}
-          onChange={handleChange}
-          margin="normal"
-          type="number"
-          disabled={!!initialProduct}
-        />
+        <div className="flex items-center gap-2">
+          <TextField
+            fullWidth
+            label="Barcode"
+            name="barcode"
+            value={product.barcode}
+            onChange={handleChange}
+            margin="normal"
+            type="number"
+            disabled={!!initialProduct}
+          />
+          <IconButton onClick={handleScan}>
+            <QrCodeScannerRoundedIcon />
+          </IconButton>
+        </div>
+
+        {isScanning && (
+          <div>
+            <video ref={videoRef} style={{ width: "100%" }} />
+          </div>
+        )}
+
         <TextField
           fullWidth
           label="Name"
