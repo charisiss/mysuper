@@ -91,23 +91,30 @@ const ProductModal: React.FC<ProductModalProps> = ({
       const codeReader = new BrowserMultiFormatReader();
       const videoInputDevices =
         await BrowserMultiFormatReader.listVideoInputDevices();
-      if (videoInputDevices.length > 0) {
-        codeReader.decodeFromVideoDevice(
-          videoInputDevices[0].deviceId,
-          videoRef.current!,
-          (result, err, controls) => {
-            if (result) {
-              const barcodeNumber = parseInt(result.getText(), 10);
-              if (!isNaN(barcodeNumber)) {
-                setProduct((prev) => ({ ...prev, barcode: barcodeNumber }));
-              }
-              controls.stop();
-              setIsScanning(false);
+      const frontCamera = videoInputDevices.find(
+        (device) =>
+          device.label.toLowerCase().includes("front") ||
+          device.label.toLowerCase().includes("user"),
+      );
+      const deviceId = frontCamera
+        ? frontCamera.deviceId
+        : videoInputDevices[0].deviceId;
+
+      codeReader.decodeFromVideoDevice(
+        deviceId,
+        videoRef.current!,
+        (result, err, controls) => {
+          if (result) {
+            const barcodeNumber = parseInt(result.getText(), 10);
+            if (!isNaN(barcodeNumber)) {
+              setProduct((prev) => ({ ...prev, barcode: barcodeNumber }));
             }
-            controlsRef.current = controls;
-          },
-        );
-      }
+            controls.stop();
+            setIsScanning(false);
+          }
+          controlsRef.current = controls;
+        },
+      );
     }
   };
 
