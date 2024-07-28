@@ -93,8 +93,8 @@ const ProductModal: React.FC<ProductModalProps> = ({
         await BrowserMultiFormatReader.listVideoInputDevices();
       const frontCamera = videoInputDevices.find(
         (device) =>
-          device.label.toLowerCase().includes("front") ||
-          device.label.toLowerCase().includes("user"),
+          !device.label.toLowerCase().includes("front") ||
+          !device.label.toLowerCase().includes("user"),
       );
       const deviceId = frontCamera
         ? frontCamera.deviceId
