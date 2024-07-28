@@ -137,8 +137,12 @@ const ProductList: React.FC<ProductListProps> = ({
     setCheckedProducts(new Set());
   };
 
-  const formatPrice = (price: any) => {
-    return typeof price === "number" ? price.toFixed(2) : "0.00";
+  const formatPrice = (price: number) => {
+    return price.toFixed(2);
+  };
+
+  const parsePrice = (price: string | number): number => {
+    return typeof price === "string" ? parseFloat(price) : price;
   };
 
   return (
@@ -146,10 +150,13 @@ const ProductList: React.FC<ProductListProps> = ({
       <ul className="divide-y divide-gray-200">
         {products.map((product) => {
           const productQuantity = product.quantity || 1;
+          const productPrice = parsePrice(product.price);
           return (
             <li
               key={product.id}
-              className={`flex items-center justify-between py-4 hover:bg-gray-100 ${currentList !== "available" ? "cursor-default" : ""}`}
+              className={`flex items-center justify-between py-4 hover:bg-gray-100 ${
+                currentList !== "available" ? "cursor-default" : ""
+              }`}
               onClick={() => handleCheckboxChange(product)}
             >
               <div className="flex items-center space-x-4">
@@ -165,7 +172,7 @@ const ProductList: React.FC<ProductListProps> = ({
                     {product.name}
                   </p>
                   <p className="flex items-center text-sm text-gray-500">
-                    {formatPrice(product.price * productQuantity)}€
+                    {formatPrice(productPrice * productQuantity)}€
                   </p>
                 </div>
               </div>
@@ -200,7 +207,9 @@ const ProductList: React.FC<ProductListProps> = ({
 
       {currentList !== "available" && (
         <div
-          className={`mt-4 flex items-center justify-around bg-gray-200 p-2 ${currentList === "offer" && "rounded-b-2xl"}`}
+          className={`mt-4 flex items-center justify-around bg-gray-200 p-2 ${
+            currentList === "offer" && "rounded-b-2xl"
+          }`}
         >
           <p className="w-full text-xl font-semibold text-black">
             Total: {formatPrice(totalCost)}€
@@ -230,7 +239,11 @@ const ProductList: React.FC<ProductListProps> = ({
               />
               <span className="flex flex-col">
                 <h2 className="text-2xl font-bold">{selectedProduct?.name}</h2>
-                <p className="">{formatPrice(selectedProduct?.price || 0)}€</p>
+                <p className="">
+                  {selectedProduct != undefined &&
+                    formatPrice(parsePrice(selectedProduct.price || 0))}
+                  €
+                </p>
               </span>
             </span>
 
@@ -239,7 +252,10 @@ const ProductList: React.FC<ProductListProps> = ({
               <span className="mr-2 flex h-12 w-full items-center justify-center gap-1 rounded-lg border border-gray-300 p-2 text-center">
                 <p>Total:</p>
                 <p className="font-bold">
-                  {formatPrice((selectedProduct?.price || 0) * quantity)}€
+                  {formatPrice(
+                    parsePrice(selectedProduct?.price || 0) * quantity,
+                  )}
+                  €
                 </p>
               </span>
               <button
@@ -281,7 +297,6 @@ const ProductList: React.FC<ProductListProps> = ({
         </div>
       )}
 
-      {/* MoreVert Menu */}
       <Menu
         anchorEl={menuAnchorEl}
         open={Boolean(menuAnchorEl)}

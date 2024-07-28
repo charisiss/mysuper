@@ -95,12 +95,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
 
         <TextField
           fullWidth
-          label="ID"
-          name="id"
-          value={product.id}
+          label="Barcode"
+          name="barcode"
+          value={product.barcode}
           onChange={handleChange}
           margin="normal"
-          type="text"
+          type="number"
           disabled={!!initialProduct}
         />
         <TextField
