@@ -89,32 +89,43 @@ const ProductModal: React.FC<ProductModalProps> = ({
       setIsScanning(true);
 
       const codeReader = new BrowserMultiFormatReader();
-      const videoInputDevices =
-        await BrowserMultiFormatReader.listVideoInputDevices();
-      const frontCamera = videoInputDevices.find(
-        (device) =>
-          !device.label.toLowerCase().includes("front") ||
-          !device.label.toLowerCase().includes("user"),
-      );
-      const deviceId = frontCamera
-        ? frontCamera.deviceId
-        : videoInputDevices[0].deviceId;
+      try {
+        // Get video input devices
+        const videoInputDevices =
+          await BrowserMultiFormatReader.listVideoInputDevices();
 
-      codeReader.decodeFromVideoDevice(
-        deviceId,
-        videoRef.current!,
-        (result, err, controls) => {
-          if (result) {
-            const barcodeNumber = parseInt(result.getText(), 10);
-            if (!isNaN(barcodeNumber)) {
-              setProduct((prev) => ({ ...prev, barcode: barcodeNumber }));
+        // Filter to find the back camera
+        const backCamera = videoInputDevices.find(
+          (device) =>
+            device.label.toLowerCase().includes("back") ||
+            device.label.toLowerCase().includes("rear"),
+        );
+
+        // If no back camera is found, fallback to the first available device
+        const deviceId = backCamera
+          ? backCamera.deviceId
+          : videoInputDevices[0].deviceId;
+
+        // Start decoding from the selected device
+        codeReader.decodeFromVideoDevice(
+          deviceId,
+          videoRef.current!,
+          (result, err, controls) => {
+            if (result) {
+              const barcodeNumber = parseInt(result.getText(), 10);
+              if (!isNaN(barcodeNumber)) {
+                setProduct((prev) => ({ ...prev, barcode: barcodeNumber }));
+              }
+              controls.stop();
+              setIsScanning(false);
             }
-            controls.stop();
-            setIsScanning(false);
-          }
-          controlsRef.current = controls;
-        },
-      );
+            controlsRef.current = controls;
+          },
+        );
+      } catch (error) {
+        console.error("Error accessing video input devices:", error);
+        setIsScanning(false);
+      }
     }
   };
 
