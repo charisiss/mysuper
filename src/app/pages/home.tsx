@@ -294,7 +294,9 @@ const Home: React.FC = () => {
         />
 
         <ProductList
-          products={filteredProducts}
+          products={filteredProducts.sort((a, b) =>
+            a.name.localeCompare(b.name),
+          )}
           onEdit={handleEditProduct}
           onDelete={handleDeleteProduct}
           onMoveToOffers={handleMoveToOffers}
