@@ -176,6 +176,29 @@ const Home: React.FC = () => {
     setOfferList((prev) => [...prev, product]);
   };
 
+  const handleClearList = async (list: "shopping" | "offer" | "available") => {
+    if (list === "shopping") {
+      await Promise.all(
+        shoppingList.map((product) =>
+          deleteDoc(doc(db, "products", product.id)),
+        ),
+      );
+      setShoppingList([]);
+    } else if (list === "offer") {
+      await Promise.all(
+        offerList.map((product) => deleteDoc(doc(db, "products", product.id))),
+      );
+      setOfferList([]);
+    } else if (list === "available") {
+      await Promise.all(
+        availableProducts.map((product) =>
+          deleteDoc(doc(db, "products", product.id)),
+        ),
+      );
+      setAvailableProducts([]);
+    }
+  };
+
   if (loading)
     return (
       <div className="flex h-svh flex-col items-center justify-center">
@@ -233,8 +256,8 @@ const Home: React.FC = () => {
               totalCost={calculateTotalCost(shoppingList)}
               onEdit={handleEditProduct}
               onDelete={handleDeleteProduct}
-              onMoveToOffers={handleMoveToOffers}
               onAddToList={handleAddToList}
+              onClearList={handleClearList}
               currentList="shopping"
             />
           </AccordionDetails>
@@ -256,12 +279,12 @@ const Home: React.FC = () => {
           </AccordionSummary>
           <AccordionDetails sx={{ padding: 0 }}>
             <ProductList
-              products={offerList}
-              totalCost={calculateTotalCost(offerList)}
+              products={shoppingList}
+              totalCost={calculateTotalCost(shoppingList)}
               onEdit={handleEditProduct}
               onDelete={handleDeleteProduct}
-              onMoveToOffers={handleMoveToOffers}
               onAddToList={handleAddToList}
+              onClearList={handleClearList}
               currentList="offer"
             />
           </AccordionDetails>
@@ -299,7 +322,7 @@ const Home: React.FC = () => {
           )}
           onEdit={handleEditProduct}
           onDelete={handleDeleteProduct}
-          onMoveToOffers={handleMoveToOffers}
+          onClearList={handleClearList}
           onAddToList={handleAddToList}
           currentList="available"
           totalCost={0}

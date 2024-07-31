@@ -15,7 +15,7 @@ interface ProductListProps {
     product: Product,
     fromList: "available" | "shopping" | "offer",
   ) => void;
-  onMoveToOffers: (product: Product) => void;
+  onClearList: (list: "shopping" | "offer" | "available") => {};
   onAddToList: (
     product: Product,
     listType: "shopping" | "offer",
@@ -29,7 +29,7 @@ const ProductList: React.FC<ProductListProps> = ({
   totalCost,
   onEdit,
   onDelete,
-  onMoveToOffers,
+  onClearList,
   onAddToList,
   currentList,
 }) => {
@@ -132,11 +132,6 @@ const ProductList: React.FC<ProductListProps> = ({
     setListModalOpen(false);
   };
 
-  const handleClearList = () => {
-    products.forEach((product) => onDelete(product, currentList));
-    setCheckedProducts(new Set());
-  };
-
   const formatPrice = (price: number) => {
     return price.toFixed(2);
   };
@@ -215,7 +210,12 @@ const ProductList: React.FC<ProductListProps> = ({
             Total: {formatPrice(totalCost)}€
           </p>
           {products.length > 0 && (
-            <ClearIcon className="w-10" onClick={handleClearList} />
+            <IconButton
+              className="w-10"
+              onClick={() => onClearList(currentList)}
+            >
+              <ClearIcon />
+            </IconButton>
           )}
         </div>
       )}
