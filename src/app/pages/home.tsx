@@ -136,20 +136,29 @@ const Home: React.FC = () => {
   };
 
   const handleSaveProduct = async (product: Product) => {
-    const updateProduct = (prev: Product[]) =>
-      prev.map((p) => (p.id === product.id ? product : p));
-
     if (currentProduct) {
-      setAvailableProducts(updateProduct(availableProducts));
-      setShoppingList(updateProduct(shoppingList));
-      setOfferList(updateProduct(offerList));
-    } else {
-      if (!product.id) {
-        product.id = Date.now().toString(); // Ensure ID is a string
+      if (product.id) {
+        const { id, ...productData } = product;
+        await updateDoc(doc(db, "products", id), productData);
+
+        const updateProduct = (prev: Product[]) =>
+          prev.map((p) => (p.id === id ? { ...p, ...productData } : p));
+
+        setAvailableProducts(updateProduct(availableProducts));
+        setShoppingList(updateProduct(shoppingList));
+        setOfferList(updateProduct(offerList));
+      } else {
+        console.error("Product ID is missing");
       }
-      await addDoc(collection(db, "products"), product);
+    } else {
+      const { id, ...productData } = product;
+      const docRef = await addDoc(collection(db, "products"), productData);
+      product.id = docRef.id;
+
       setAvailableProducts((prev) => [...prev, product]);
     }
+
+    // Close the modal and reset currentProduct
     setCurrentProduct(undefined);
     setModalOpen(false);
   };
@@ -279,8 +288,8 @@ const Home: React.FC = () => {
           </AccordionSummary>
           <AccordionDetails sx={{ padding: 0 }}>
             <ProductList
-              products={shoppingList}
-              totalCost={calculateTotalCost(shoppingList)}
+              products={offerList}
+              totalCost={calculateTotalCost(offerList)}
               onEdit={handleEditProduct}
               onDelete={handleDeleteProduct}
               onAddToList={handleAddToList}

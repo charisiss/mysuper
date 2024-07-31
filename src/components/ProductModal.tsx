@@ -112,9 +112,14 @@ const ProductModal: React.FC<ProductModalProps> = ({
           videoRef.current!,
           (result, err, controls) => {
             if (result) {
-              const barcodeNumber = parseInt(result.getText(), 10);
+              const barcodeString = result.getText();
+              // Convert barcodeString to a number and handle it appropriately
+              const barcodeNumber = parseInt(barcodeString, 10);
               if (!isNaN(barcodeNumber)) {
-                setProduct((prev) => ({ ...prev, barcode: barcodeNumber }));
+                setProduct((prev: Product) => ({
+                  ...prev,
+                  barcode: barcodeNumber,
+                }));
               }
               controls.stop();
               setIsScanning(false);
@@ -151,15 +156,15 @@ const ProductModal: React.FC<ProductModalProps> = ({
 
         <div className="flex items-center gap-2">
           <TextField
-            fullWidth
             label="Barcode"
-            name="barcode"
-            value={product.barcode}
-            onChange={handleChange}
+            variant="outlined"
+            fullWidth
             margin="normal"
-            type="number"
-            disabled={!!initialProduct}
+            name="barcode"
+            value={product.barcode || ""}
+            onChange={handleChange}
           />
+
           <IconButton onClick={handleScan}>
             <QrCodeScannerRoundedIcon />
           </IconButton>
