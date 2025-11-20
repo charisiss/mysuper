@@ -151,7 +151,10 @@ const dedupeProducts = (products: Product[]) => {
   });
 };
 
-const findBestMatchingProduct = (query: string, products: Product[]) => {
+const findBestMatchingProduct = (
+  query: string,
+  products: Product[],
+): Product | null => {
   const normalizedQuery = normalizeString(query);
   if (!normalizedQuery) return null;
 
@@ -414,7 +417,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       return;
     }
 
-    const combinedProducts = dedupeProducts([
+    const combinedProducts: Product[] = dedupeProducts([
       ...latestListsRef.current.availableProducts,
       ...latestListsRef.current.shoppingList,
       ...latestListsRef.current.offerList,
