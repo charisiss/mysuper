@@ -42,8 +42,8 @@ const HomeContent: React.FC = () => {
   } = useHomeContext();
 
   return (
-    <div className="relative min-h-svh bg-gray-50 pb-24">
-      <div className="p-5 pb-36">
+    <div className="relative min-h-svh bg-gradient-to-b from-emerald-50/60 via-white to-white pb-24">
+      <div className="pb-36">
         {activeTab === "shopping" && (
           <ShoppingTab
             products={shoppingList}

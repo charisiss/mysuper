@@ -3,6 +3,7 @@ export interface Product {
   id: string;
   name: string;
   price: number;
+  category?: string;
   fromList: "available" | "shopping" | "offer";
   quantity?: number;
 }

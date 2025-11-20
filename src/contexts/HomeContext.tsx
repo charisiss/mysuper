@@ -102,6 +102,8 @@ export const useHomeContext = () => {
   return context;
 };
 
+const DEFAULT_CATEGORY = "Groceries";
+
 const normalizeString = (str: string) =>
   str
     .normalize("NFD")
@@ -218,6 +220,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         const data = docSnapshot.data() as Omit<Product, "id">;
         return {
           ...data,
+          category: data.category || DEFAULT_CATEGORY,
           id: docSnapshot.id,
         };
       });
@@ -272,9 +275,14 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const handleSaveProduct = useCallback(
     async (product: Product) => {
+      const productWithCategory = {
+        ...product,
+        category: product.category || DEFAULT_CATEGORY,
+      };
+
       if (currentProduct) {
-        if (product.id) {
-          const { id, ...productData } = product;
+        if (productWithCategory.id) {
+          const { id, ...productData } = productWithCategory;
           await updateDoc(doc(db, "products", id), productData);
 
           const updateProduct = (prev: Product[]) =>
@@ -287,9 +295,9 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
           console.error("Product ID is missing");
         }
       } else {
-        const { id, ...productData } = product;
+        const { id, ...productData } = productWithCategory;
         const docRef = await addDoc(collection(db, "products"), productData);
-        const newProduct = { ...product, id: docRef.id };
+        const newProduct = { ...productWithCategory, id: docRef.id };
         setAvailableProducts((prev) => [...prev, newProduct]);
       }
 
@@ -317,6 +325,10 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const handleAddToList = useCallback(
     async (product: Product, listType: "shopping" | "offer", quantity: number) => {
+      const productWithCategory = {
+        ...product,
+        category: product.category || DEFAULT_CATEGORY,
+      };
       const setter =
         listType === "shopping" ? setShoppingList : setOfferList;
       const currentList =
@@ -345,7 +357,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       }
 
       const payload = {
-        ...product,
+        ...productWithCategory,
         quantity,
         fromList: listType,
       };
@@ -453,8 +465,16 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     };
 
     recognition.onerror = (event: SpeechRecognitionErrorEventLike) => {
+      // Ignore errors during language switching
+      if (pendingLangRef.current) {
+        return;
+      }
+      
       if (event.error === "not-allowed") {
         setVoiceError("Microphone access denied.");
+      } else if (event.error === "aborted" || event.error === "network") {
+        // These errors are common during language switching, ignore them
+        return;
       } else {
         setVoiceError("An error occurred while listening.");
       }
@@ -466,18 +486,26 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         const nextLang = pendingLangRef.current;
         pendingLangRef.current = null;
         recognitionRef.current.lang = nextLang;
-        try {
-          recognitionRef.current.start();
-          setSpeechLang(nextLang);
-          setIsListening(true);
-          setVoiceMessage(
-            `Speak in ${nextLang === "el-GR" ? "Greek" : "English"} to add a product...`,
-          );
-          return;
-        } catch (error) {
-          console.error("Speech restart error", error);
-          setVoiceError("Unable to switch language.");
-        }
+        setVoiceError(null);
+        
+        // Add a small delay before restarting to ensure recognition is ready
+        setTimeout(() => {
+          if (recognitionRef.current) {
+            try {
+              recognitionRef.current.start();
+              setSpeechLang(nextLang);
+              setIsListening(true);
+              setVoiceMessage(
+                `Speak in ${nextLang === "el-GR" ? "Greek" : "English"} to add a product...`,
+              );
+            } catch (error) {
+              console.error("Speech restart error", error);
+              setVoiceError("Unable to switch language.");
+              setIsListening(false);
+            }
+          }
+        }, 100);
+        return;
       }
       setIsListening(false);
       setSpeechLang("el-GR");
@@ -513,6 +541,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     if (!recognitionRef.current) return;
     pendingLangRef.current = lang;
     setSpeechLang(lang);
+    setVoiceError(null);
     setVoiceMessage(
       `Speak in ${lang === "el-GR" ? "Greek" : "English"} to add a product...`,
     );
@@ -557,10 +586,17 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const filteredProducts = useMemo(() => {
     const normalizedSearch = normalizeString(searchTerm);
+    if (!normalizedSearch) {
+      return availableProducts;
+    }
+
     return availableProducts.filter((product) =>
-      [normalizeString(product.name), product.id.toString()].some((term) =>
-        term.includes(normalizedSearch),
-      ),
+      [
+        normalizeString(product.name),
+        normalizeString(product.category || ""),
+        normalizeString(product.id),
+        product.barcode ? product.barcode.toString() : "",
+      ].some((term) => term.includes(normalizedSearch)),
     );
   }, [availableProducts, searchTerm]);
 

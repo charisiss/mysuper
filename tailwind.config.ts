@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        manrope: ["Manrope", "sans-serif"],
+        jakarta: ["var(--font-jakarta)", "sans-serif"],
       },
       colors: {
         primary: "#00d6d6",

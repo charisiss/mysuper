@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Product } from "@/types/Product";
 import { IconButton, Checkbox, Menu, MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -15,7 +15,9 @@ interface ProductListProps {
     product: Product,
     fromList: "available" | "shopping" | "offer",
   ) => void;
-  onClearList: (list: "shopping" | "offer" | "available") => {};
+  onClearList: (
+    list: "shopping" | "offer" | "available",
+  ) => void | Promise<void>;
   onAddToList: (
     product: Product,
     listType: "shopping" | "offer",
@@ -23,6 +25,31 @@ interface ProductListProps {
   ) => void;
   currentList: "shopping" | "offer" | "available";
 }
+
+const CATEGORY_KEYWORDS = [
+  { label: "Fruits", keywords: ["apple", "banana", "orange", "berry"] },
+  { label: "Vegetables", keywords: ["tomato", "carrot", "lettuce", "pepper"] },
+  { label: "Bakery", keywords: ["bread", "baguette", "roll", "bun"] },
+  { label: "Dairy", keywords: ["milk", "cheese", "yogurt", "butter"] },
+  { label: "Pantry", keywords: ["rice", "pasta", "oil", "sauce"] },
+];
+
+const inferCategoryFromName = (productName: string) => {
+  const normalizedName = productName.toLowerCase();
+  const match = CATEGORY_KEYWORDS.find((category) =>
+    category.keywords.some((keyword) => normalizedName.includes(keyword)),
+  );
+
+  return match ? match.label : "Groceries";
+};
+
+const resolveCategory = (product: Product) => {
+  const explicitCategory = product.category?.trim();
+  if (explicitCategory) {
+    return explicitCategory;
+  }
+  return inferCategoryFromName(product.name);
+};
 
 const ProductList: React.FC<ProductListProps> = ({
   products,
@@ -132,9 +159,17 @@ const ProductList: React.FC<ProductListProps> = ({
     setListModalOpen(false);
   };
 
-  const formatPrice = (price: number) => {
-    return price.toFixed(2);
-  };
+  const currencyFormatter = useMemo(
+    () =>
+      new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+      }),
+    [],
+  );
+
+  const formatPrice = (price: number) => currencyFormatter.format(price);
 
   const parsePrice = (price: string | number): number => {
     return typeof price === "string" ? parseFloat(price) : price;
@@ -142,83 +177,86 @@ const ProductList: React.FC<ProductListProps> = ({
 
   return (
     <>
-      <ul className="divide-y divide-gray-200">
+      <div className="flex flex-col gap-3 p-2.5">
         {products.map((product) => {
           const productQuantity = product.quantity || 1;
           const productPrice = parsePrice(product.price);
+          const displayPrice = formatPrice(productPrice * productQuantity);
+          const isAvailableList = currentList === "available";
+
           return (
-            <li
+            <div
               key={product.id}
-              className={`flex items-center justify-between py-4 hover:bg-gray-100 ${
-                currentList !== "available" ? "cursor-default" : ""
-              }`}
+              role="button"
+              tabIndex={0}
+              className="group flex w-full items-center justify-between rounded-3xl bg-white/90 px-5 py-4 text-left shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] focus-visible:ring-2 focus-visible:ring-emerald-300"
               onClick={() => handleCheckboxChange(product)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleCheckboxChange(product);
+                }
+              }}
             >
-              <div className="flex items-center space-x-4">
-                {currentList !== "available" && (
-                  <Checkbox
-                    checked={checkedProducts.has(product.id)}
-                    className="accent-primary"
-                  />
-                )}
-                <div className={`${currentList == "available" && "pl-1"}`}>
-                  <p className="font-semibold">
-                    {productQuantity > 1 && `${productQuantity}x `}
-                    {product.name}
-                  </p>
-                  <p className="flex items-center text-sm text-gray-500">
-                    {formatPrice(productPrice * productQuantity)}€
-                  </p>
-                </div>
-              </div>
-              {currentList === "available" && (
-                <div className="flex items-center space-x-2">
+              {isAvailableList ? (
+                <>
+                  <div className="flex flex-col gap-1">
+                    <p className="text-base font-semibold text-slate-900">
+                      {product.name}
+                    </p>
+                    <span className="text-sm text-slate-400">
+                      {resolveCategory(product)}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {productQuantity > 1 && (
+                      <span className="text-xs font-medium text-slate-400">
+                        {productQuantity} pcs
+                      </span>
+                    )}
+                    <IconButton
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleMenuOpen(e, product);
+                      }}
+                      className="text-gray-400 transition hover:text-gray-700"
+                    >
+                      <MoreVertIcon />
+                    </IconButton>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center space-x-4">
+                    <Checkbox
+                      checked={checkedProducts.has(product.id)}
+                      className="accent-primary"
+                    />
+                    <div className="flex flex-col gap-1">
+                      <p className="text-base font-semibold text-slate-900">
+                        {productQuantity > 1 && `${productQuantity}x `}
+                        {product.name}
+                      </p>
+                      <span className="text-sm font-medium text-slate-600">
+                        {displayPrice}
+                      </span>
+                    </div>
+                  </div>
                   <IconButton
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleMenuOpen(e, product);
+                      handleDeleteFromList(product, currentList);
                     }}
-                    className="text-gray-500 hover:text-gray-700"
+                    className="text-gray-400 transition hover:text-gray-700"
                   >
-                    <MoreVertIcon />
+                    <ClearIcon />
                   </IconButton>
-                </div>
+                </>
               )}
-              {currentList !== "available" && (
-                <IconButton
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDeleteFromList(product, currentList);
-                  }}
-                  className="pr-4 text-gray-500 hover:text-gray-700"
-                >
-                  <RemoveIcon />
-                </IconButton>
-              )}
-            </li>
+            </div>
           );
         })}
-      </ul>
-
-      {currentList !== "available" && (
-        <div
-          className={`mt-4 flex items-center justify-around bg-gray-200 p-2 ${
-            currentList === "offer" && "rounded-b-2xl"
-          }`}
-        >
-          <p className="w-full text-xl font-semibold text-black">
-            Total: {formatPrice(totalCost)}€
-          </p>
-          {products.length > 0 && (
-            <IconButton
-              className="w-10"
-              onClick={() => onClearList(currentList)}
-            >
-              <ClearIcon />
-            </IconButton>
-          )}
-        </div>
-      )}
+      </div>
 
       {listModalOpen && (
         <div

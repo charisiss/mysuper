@@ -5,7 +5,8 @@ import React from "react";
 import ProductList from "@/components/ProductList";
 import { Product } from "@/types/Product";
 import TabHeader from "./TabHeader";
-import VoiceToggleButton, { VoiceControls } from "./VoiceToggleButton";
+import { VoiceControls } from "./VoiceToggleButton";
+import VoiceMicButton from "./VoiceMicButton";
 
 interface ShoppingTabProps {
   products: Product[];
@@ -35,27 +36,33 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
   voiceControls,
   voiceError,
 }) => {
+  const currencyFormatter = React.useMemo(
+    () =>
+      new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+      }),
+    [],
+  );
+
+  const formatPrice = (price: number) => currencyFormatter.format(price);
+
   return (
-    <div className="flex flex-col gap-4 pb-24 pt-2">
+    <div className="flex flex-col">
       <TabHeader
-        title="SHOPPING LIST"
-        iconSrc="/images/productslist.png"
-        iconAlt="Shopping list icon"
-        actionSlot={
-          voiceControls ? <VoiceToggleButton {...voiceControls} /> : undefined
-        }
-      />
+        title="Shopping List"
+        actionSlot={<VoiceMicButton voiceControls={voiceControls} />}
+      >
+        <p className="text-sm text-slate-500">
+          {products.length} item{products.length === 1 ? "" : "s"}
+        </p>
+      </TabHeader>
       {voiceControls && voiceError && (
-        <p className="text-sm text-red-600">{voiceError}</p>
+        <p className="px-6 pb-2 text-sm text-red-600">{voiceError}</p>
       )}
 
-      <div className="rounded-2xl bg-white p-4 shadow">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-bold">Items</h2>
-          <p className="text-sm text-gray-500">
-            {products.length} item{products.length === 1 ? "" : "s"}
-          </p>
-        </div>
+      <div className="flex flex-col gap-3 p-2.5">
         <ProductList
           products={products}
           totalCost={totalCost}
@@ -65,6 +72,15 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
           onAddToList={onAddToList}
           currentList="shopping"
         />
+
+        <div className="rounded-3xl bg-white/90 px-5 py-4 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-semibold text-slate-900">Total</p>
+            <p className="text-xl font-bold text-slate-900">
+              {formatPrice(totalCost)}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
