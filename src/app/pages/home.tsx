@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Product } from "@/types/Product";
 import ProductList from "@/components/ProductList";
 import ProductModal from "@/components/ProductModal";
@@ -12,6 +12,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MicIcon from "@mui/icons-material/Mic";
 import Image from "next/image";
 import {
   collection,
@@ -25,11 +26,128 @@ import { db } from "@/app/firebaseConfig";
 import { useAuth } from "@/app/AuthContext";
 import Login from "@/components/Login";
 
+type SpeechRecognitionAlternative = {
+  transcript: string;
+};
+
+type SpeechRecognitionResult = {
+  [index: number]: SpeechRecognitionAlternative;
+};
+
+type SpeechRecognitionResultList = {
+  [index: number]: SpeechRecognitionResult;
+};
+
+type SpeechRecognitionEventLike = {
+  results: SpeechRecognitionResultList;
+};
+
+type SpeechRecognitionErrorEventLike = {
+  error: string;
+};
+
+interface SpeechRecognitionInstance {
+  lang: string;
+  interimResults: boolean;
+  maxAlternatives: number;
+  start: () => void;
+  stop: () => void;
+  onresult: ((event: SpeechRecognitionEventLike) => void) | null;
+  onerror: ((event: SpeechRecognitionErrorEventLike) => void) | null;
+  onend: (() => void) | null;
+}
+
+type SpeechRecognitionConstructor = new () => SpeechRecognitionInstance;
+
+const normalizeString = (str: string) => {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+};
+
+const getLevenshteinDistance = (a: string, b: string) => {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+
+  const matrix = Array.from({ length: b.length + 1 }, (_, i) => [i]);
+  matrix[0] = Array.from({ length: a.length + 1 }, (_, j) => j);
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b[i - 1] === a[j - 1]) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] =
+          Math.min(
+            matrix[i - 1][j],
+            matrix[i][j - 1],
+            matrix[i - 1][j - 1],
+          ) + 1;
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+};
+
+const getSimilarityScore = (a: string, b: string) => {
+  if (!a.length || !b.length) return 0;
+  if (a === b) return 1;
+
+  const distance = getLevenshteinDistance(a, b);
+  return 1 - distance / Math.max(a.length, b.length);
+};
+
+const dedupeProducts = (products: Product[]) => {
+  const seen = new Set<string>();
+  return products.filter((product) => {
+    if (seen.has(product.id)) return false;
+    seen.add(product.id);
+    return true;
+  });
+};
+
+const findBestMatchingProduct = (query: string, products: Product[]) => {
+  const normalizedQuery = normalizeString(query);
+  if (!normalizedQuery) return null;
+
+  let bestProduct: Product | null = null;
+  let bestScore = 0;
+
+  products.forEach((product) => {
+    const normalizedName = normalizeString(product.name);
+    if (!normalizedName) return;
+
+    let score = 0;
+    if (normalizedName === normalizedQuery) {
+      score = 1;
+    } else if (
+      normalizedName.includes(normalizedQuery) ||
+      normalizedQuery.includes(normalizedName)
+    ) {
+      score = 0.92;
+    } else {
+      score = getSimilarityScore(normalizedName, normalizedQuery);
+    }
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestProduct = product;
+    }
+  });
+
+  return bestScore >= 0.6 ? bestProduct : null;
+};
+
 const Home: React.FC = () => {
   const { user, loading } = useAuth();
 
   const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
   const [shoppingList, setShoppingList] = useState<Product[]>([]);
+  
   const [offerList, setOfferList] = useState<Product[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | undefined>(
@@ -37,8 +155,20 @@ const Home: React.FC = () => {
   );
   const [searchTerm, setSearchTerm] = useState("");
   const [expanded, setExpanded] = useState<string | false>("shopping");
+  const [isListening, setIsListening] = useState(false);
+  const [isVoiceSupported, setIsVoiceSupported] = useState(true);
+  const [voiceError, setVoiceError] = useState<string | null>(null);
+  const [voiceMessage, setVoiceMessage] = useState<string | null>(null);
+  const [speechLang, setSpeechLang] = useState<"el-GR" | "en-US">("el-GR");
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
+  const pendingLangRef = useRef<"el-GR" | "en-US" | null>(null);
+  const latestListsRef = useRef({
+    availableProducts,
+    shoppingList,
+    offerList,
+  });
 
-  const allowedEmail = "charisissam@gmail.com";
+  const allowedEmails = ["charisissam@gmail.com", "panos9409@gmail.com"];
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -112,6 +242,8 @@ const Home: React.FC = () => {
     }
   };
 
+  const handleAddToListRef = useRef(handleAddToList);
+
   const handleEditProduct = (product: Product) => {
     setCurrentProduct(product);
     setModalOpen(true);
@@ -167,11 +299,178 @@ const Home: React.FC = () => {
     setSearchTerm(e.target.value);
   };
 
-  const normalizeString = (str: string) => {
-    return str
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase();
+  useEffect(() => {
+    latestListsRef.current = {
+      availableProducts,
+      shoppingList,
+      offerList,
+    };
+  }, [availableProducts, offerList, shoppingList]);
+
+  useEffect(() => {
+    handleAddToListRef.current = handleAddToList;
+  }, [handleAddToList]);
+
+  const processTranscript = useCallback(async (rawTranscript: string) => {
+    const transcript = rawTranscript.trim();
+    if (!transcript) {
+      setVoiceMessage("No product was heard. Try again.");
+      return;
+    }
+
+    const combinedProducts = dedupeProducts([
+      ...latestListsRef.current.availableProducts,
+      ...latestListsRef.current.shoppingList,
+      ...latestListsRef.current.offerList,
+    ]);
+
+    const matchedProduct = findBestMatchingProduct(transcript, combinedProducts);
+
+    if (!matchedProduct) {
+      setVoiceMessage(`No product was found for "${transcript}".`);
+      return;
+    }
+
+    const productToAdd = matchedProduct as Product;
+
+    try {
+      await handleAddToListRef.current(productToAdd, "shopping", 1);
+      setVoiceError(null);
+      setVoiceMessage(`"${productToAdd.name}" was added to the list.`);
+    } catch (error) {
+      console.error("Voice add error", error);
+      setVoiceError("Failed to add product. Try again.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const speechWindow = window as typeof window & {
+      webkitSpeechRecognition?: SpeechRecognitionConstructor;
+      SpeechRecognition?: SpeechRecognitionConstructor;
+    };
+
+    const SpeechRecognitionClass: SpeechRecognitionConstructor | undefined =
+      speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition;
+
+    if (!SpeechRecognitionClass) {
+      setIsVoiceSupported(false);
+      setVoiceError("The browser does not support speech recognition.");
+      return;
+    }
+
+    const recognition: SpeechRecognitionInstance = new SpeechRecognitionClass();
+    recognition.lang = speechLang;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = async (event: SpeechRecognitionEventLike) => {
+      const transcript = event.results[0][0]?.transcript ?? "";
+      await processTranscript(transcript);
+    };
+
+    recognition.onerror = (event: SpeechRecognitionErrorEventLike) => {
+      if (event.error === "not-allowed") {
+        setVoiceError("Microphone access denied.");
+      } else {
+        setVoiceError("An error occurred while listening.");
+      }
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      if (pendingLangRef.current && recognitionRef.current) {
+        const nextLang = pendingLangRef.current;
+        pendingLangRef.current = null;
+        recognitionRef.current.lang = nextLang;
+        try {
+          recognitionRef.current.start();
+          setSpeechLang(nextLang);
+          setIsListening(true);
+          setVoiceMessage(
+            `Speak in ${nextLang === "el-GR" ? "Greek" : "English"} to add a product...`,
+          );
+          return;
+        } catch (error) {
+          console.error("Speech restart error", error);
+          setVoiceError("Unable to switch language.");
+        }
+      }
+      setIsListening(false);
+      setSpeechLang("el-GR");
+    };
+
+    recognitionRef.current = recognition;
+
+    return () => {
+      recognition.stop();
+      recognitionRef.current = null;
+    };
+  }, [processTranscript]);
+
+  const startListeningWith = (lang: "el-GR" | "en-US") => {
+    if (!recognitionRef.current) return;
+
+    recognitionRef.current.lang = lang;
+    try {
+      recognitionRef.current.start();
+      setSpeechLang(lang);
+      setIsListening(true);
+      setVoiceMessage(
+        `Speak in ${lang === "el-GR" ? "Greek" : "English"} to add a product...`,
+      );
+    } catch (error) {
+      console.error("Speech start error", error);
+      setVoiceError("Unable to start listening.");
+      setIsListening(false);
+    }
+  };
+
+  const switchListeningLanguage = (lang: "el-GR" | "en-US") => {
+    if (!recognitionRef.current) return;
+    pendingLangRef.current = lang;
+    setSpeechLang(lang);
+    setVoiceMessage(
+      `Speak in ${lang === "el-GR" ? "Greek" : "English"} to add a product...`,
+    );
+    try {
+      recognitionRef.current.stop();
+    } catch (error) {
+      console.error("Speech stop error", error);
+      pendingLangRef.current = null;
+      setVoiceError("Unable to switch language.");
+    }
+  };
+
+  const handleMicClick = () => {
+    if (!isVoiceSupported || !recognitionRef.current) {
+      setVoiceError("Voice input is not available.");
+      return;
+    }
+
+    setVoiceError(null);
+
+    if (!isListening) {
+      startListeningWith("el-GR");
+      return;
+    }
+
+    if (speechLang === "el-GR") {
+      switchListeningLanguage("en-US");
+      return;
+    }
+
+    try {
+      pendingLangRef.current = null;
+      recognitionRef.current.stop();
+      setIsListening(false);
+      setVoiceMessage("Voice input stopped.");
+      setSpeechLang("el-GR");
+    } catch (error) {
+      console.error("Speech stop error", error);
+      setVoiceError("Unable to stop listening.");
+    }
   };
 
   const filteredProducts = availableProducts.filter((product) =>
@@ -217,7 +516,7 @@ const Home: React.FC = () => {
 
   if (!user) return <Login />;
 
-  if (user.email !== allowedEmail) {
+  if (!allowedEmails.includes(user.email ?? "")) {
     return (
       <div className="flex h-svh flex-col justify-center">
         <p className="text-center text-2xl font-bold">ACCESS DENIED</p>
@@ -231,16 +530,56 @@ const Home: React.FC = () => {
   return (
     <div className="p-5">
       <div className="pb-5">
-        <div className="flex w-full items-center justify-start gap-2 pb-5">
-          <span className="h-12 w-12">
-            <Image
-              src={"/images/productslist.png"}
-              alt="My Super Image"
-              width={50}
-              height={50}
-            />
-          </span>
-          <h1 className="text-xl font-bold">LISTS</h1>
+        <div className="flex flex-col gap-3 pb-5">
+          <div className="flex w-full items-center justify-between gap-3">
+            <span className="flex items-center gap-2">
+              <span className="h-12 w-12">
+                <Image
+                  src={"/images/productslist.png"}
+                  alt="My Super Image"
+                  width={50}
+                  height={50}
+                />
+              </span>
+              <h1 className="text-xl font-bold">LISTS</h1>
+            </span>
+            <button
+              type="button"
+              onClick={handleMicClick}
+              disabled={!isVoiceSupported}
+              aria-pressed={isListening}
+              className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                !isVoiceSupported
+                  ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
+                  : !isListening
+                    ? "border-gray-300 bg-white text-gray-700"
+                    : speechLang === "el-GR"
+                      ? "border-blue-400 bg-blue-50 text-blue-700"
+                      : "border-green-400 bg-green-50 text-green-700"
+              }`}
+              title={
+                !isVoiceSupported
+                  ? "Voice input not supported"
+                  : !isListening
+                    ? "Click to listen in Greek"
+                    : speechLang === "el-GR"
+                      ? "Click to switch to English"
+                      : "Click to stop listening"
+              }
+            >
+              <MicIcon fontSize="small" />
+              {!isVoiceSupported
+                ? "Voice unavailable"
+                : !isListening
+                  ? "Speak in Greek"
+                  : speechLang === "el-GR"
+                    ? "Switch to English"
+                    : "Stop voice"}
+            </button>
+          </div>
+          {voiceError && (
+            <p className="text-sm text-red-600">{voiceError}</p>
+          )}
         </div>
 
         <Accordion
