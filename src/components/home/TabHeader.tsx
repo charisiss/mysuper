@@ -19,7 +19,7 @@ const TabHeader: React.FC<TabHeaderProps> = ({
 
   return (
     <div
-      className={`sticky top-0 left-0 right-0 z-20 flex w-full flex-col gap-4 border-b border-white/60 bg-gradient-to-b from-white via-white/95 to-white/70 px-6 pb-6 pt-8 shadow-[0_20px_45px_rgba(15,23,42,0.08)] backdrop-blur-xl transition-all duration-500 ease-out ${
+      className={`sticky top-0 left-0 right-0 z-20 flex w-full flex-col gap-4 border-b border-white/60 bg-gradient-to-b from-white via-white/70 to-white/40 px-6 pb-6 pt-8 shadow-sm backdrop-blur-xl transition-all duration-500 ease-out ${
         isVisible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
       }`}
     >

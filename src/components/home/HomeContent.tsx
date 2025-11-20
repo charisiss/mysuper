@@ -26,6 +26,7 @@ const HomeContent: React.FC = () => {
     searchTerm,
     modalOpen,
     currentProduct,
+    availableCategories,
     voiceControls,
     voiceError,
     voiceMessage,
@@ -37,13 +38,14 @@ const HomeContent: React.FC = () => {
     handleSearchChange,
     handleTabChange,
     handleSaveProduct,
+    handleCreateCategory,
     calculateTotalCost,
     closeModal,
   } = useHomeContext();
 
   return (
     <div className="relative min-h-svh bg-gradient-to-b from-emerald-50/60 via-white to-white pb-24">
-      <div className="pb-36">
+      <div className="">
         {activeTab === "shopping" && (
           <ShoppingTab
             products={shoppingList}
@@ -97,6 +99,9 @@ const HomeContent: React.FC = () => {
         onClose={closeModal}
         onSave={handleSaveProduct}
         initialProduct={currentProduct}
+        availableCategories={availableCategories}
+        onCreateCategory={handleCreateCategory}
+        onDelete={handleDeleteProduct}
       />
     </div>
   );

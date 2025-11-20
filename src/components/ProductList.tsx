@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Product } from "@/types/Product";
-import { IconButton, Checkbox, Menu, MenuItem, styled } from "@mui/material";
+import { IconButton, Checkbox, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ClearIcon from "@mui/icons-material/Clear";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import EditIcon from "@mui/icons-material/Edit";
 import CheckBoxOutlineBlankRoundedIcon from "@mui/icons-material/CheckBoxOutlineBlankRounded";
 import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
 import Image from "next/image";
+import PlusToCheckIcon from "./PlusToCheckIcon";
 
 interface ProductListProps {
   products: Product[];
@@ -79,9 +80,9 @@ const ProductList: React.FC<ProductListProps> = ({
   const [checkedProducts, setCheckedProducts] = useState<Set<string>>(
     new Set(),
   );
-  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedProductForMenu, setSelectedProductForMenu] =
-    useState<null | Product>(null);
+  const [animatingProducts, setAnimatingProducts] = useState<Set<string>>(
+    new Set(),
+  );
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -105,32 +106,6 @@ const ProductList: React.FC<ProductListProps> = ({
     };
   }, [listModalOpen]);
 
-  const handleEdit = () => {
-    if (selectedProductForMenu) {
-      onEdit(selectedProductForMenu);
-    }
-    handleMenuClose();
-  };
-
-  const handleDeleteFromMenu = () => {
-    if (selectedProductForMenu) {
-      onDelete(selectedProductForMenu, currentList);
-    }
-    handleMenuClose();
-  };
-
-  const handleMenuOpen = (
-    event: React.MouseEvent<HTMLElement>,
-    product: Product,
-  ) => {
-    setMenuAnchorEl(event.currentTarget);
-    setSelectedProductForMenu(product);
-  };
-
-  const handleMenuClose = () => {
-    setMenuAnchorEl(null);
-    setSelectedProductForMenu(null);
-  };
 
   const handleCheckboxChange = (product: Product) => {
     if (currentList !== "available") {
@@ -201,7 +176,7 @@ const ProductList: React.FC<ProductListProps> = ({
               key={product.id}
               role="button"
               tabIndex={0}
-              className="group flex w-full items-center justify-between rounded-3xl bg-white/90 px-5 py-4 text-left shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] focus-visible:ring-2 focus-visible:ring-emerald-300 animate-fade-up animate-duration-500 animate-ease-out"
+              className="group flex w-full items-center justify-between rounded-3xl bg-white/90 px-5 py-4 text-left shadow-lg transition hover:-translate-y-0.5 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] focus-visible:ring-2 focus-visible:ring-emerald-300 animate-fade-up animate-duration-500 animate-ease-out"
               style={{
                 animationDelay: `${index * 60}ms`,
                 animationFillMode: "backwards",
@@ -231,13 +206,24 @@ const ProductList: React.FC<ProductListProps> = ({
                       </span>
                     )}
                     <IconButton
-                      onClick={(e) => {
+                      onClick={async (e) => {
                         e.stopPropagation();
-                        handleMenuOpen(e, product);
+                        setAnimatingProducts((prev) => new Set(prev).add(product.id));
+                        await onAddToList({ ...product, quantity: 1 }, "shopping", 1);
+                        // Reset animation after animation completes (0.5s animation + 3s hold = 3.5s)
+                        setTimeout(() => {
+                          setAnimatingProducts((prev) => {
+                            const next = new Set(prev);
+                            next.delete(product.id);
+                            return next;
+                          });
+                        }, 3500);
                       }}
-                      className="text-gray-400 transition hover:text-gray-700"
+                      className="text-gray-400 transition hover:text-primary"
                     >
-                      <MoreVertIcon />
+                      <PlusToCheckIcon
+                        active={animatingProducts.has(product.id)}
+                      />
                     </IconButton>
                   </div>
                 </>
@@ -290,38 +276,37 @@ const ProductList: React.FC<ProductListProps> = ({
         >
           <div
             ref={modalRef}
-            className="w-80 animate-fade-up rounded-lg bg-white p-8 animate-duration-500 animate-once animate-ease-in-out"
+            className="w-80 animate-fade-up rounded-2xl bg-white p-8 animate-duration-500 animate-once animate-ease-in-out"
             onClick={(e) => e.stopPropagation()}
           >
-            <span className="flex items-center gap-2">
-              <Image
-                src={"/images/mysuper.png"}
-                alt="My Super Image"
-                width={50}
-                height={50}
-              />
-              <span className="flex flex-col">
-                <h2 className="text-2xl font-bold">{selectedProduct?.name}</h2>
-                <p className="">
-                  {selectedProduct != undefined &&
-                    formatPrice(parsePrice(selectedProduct.price || 0))}
-                  €
-                </p>
+            <div className="flex items-start justify-between">
+              <span className="flex items-center gap-2">
+                <span className="flex flex-col">
+                  <h2 className="text-2xl font-bold">{selectedProduct?.name}</h2>
+                  <p className="">
+                    {selectedProduct != undefined &&
+                      formatPrice(parsePrice(selectedProduct.price || 0))}
+                    €
+                  </p>
+                </span>
               </span>
-            </span>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (selectedProduct) {
+                    setListModalOpen(false);
+                    onEdit(selectedProduct);
+                  }
+                }}
+                className="text-gray-400 transition hover:text-primary"
+              >
+                <EditIcon />
+              </IconButton>
+            </div>
 
             {/* QUANTITY */}
             <div className="mb-4 mt-8 flex items-center justify-center">
-              <span className="mr-2 flex h-12 w-full items-center justify-center gap-1 rounded-lg border border-gray-300 p-2 text-center">
-                <p>Total:</p>
-                <p className="font-bold">
-                  {formatPrice(
-                    parsePrice(selectedProduct?.price || 0) * quantity,
-                  )}
-                  €
-                </p>
-              </span>
-              <button
+            <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 className="h-12 rounded-l-lg border border-gray-300 p-2"
               >
@@ -339,6 +324,15 @@ const ProductList: React.FC<ProductListProps> = ({
               >
                 <AddIcon />
               </button>
+              <span className="ml-2.5 flex h-12 w-full items-center justify-center gap-1 rounded-lg border border-gray-300 p-2 text-center">
+                <p>Total:</p>
+                <p className="font-bold">
+                  {formatPrice(
+                    parsePrice(selectedProduct?.price || 0) * quantity,
+                  )}
+                  €
+                </p>
+              </span>
             </div>
 
             {/* BUTTONS */}
@@ -347,27 +341,19 @@ const ProductList: React.FC<ProductListProps> = ({
                 className="w-full rounded-lg border border-primary bg-primary px-4 py-2 font-bold uppercase text-white"
                 onClick={() => handleAddToList("shopping")}
               >
-                ADD TO SHOPPING LIST
+                ADD TO SHOPPING
               </button>
               <button
-                className="w-full rounded-lg bg-gray-200 px-4 py-2 font-medium uppercase text-black"
+                className="w-full rounded-lg bg-gray-200 px-4 py-2 font-bold uppercase text-black"
                 onClick={() => handleAddToList("offer")}
               >
-                ADD TO OFFERS LIST
+                ADD TO OFFERS
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <Menu
-        anchorEl={menuAnchorEl}
-        open={Boolean(menuAnchorEl)}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={handleEdit}>Edit</MenuItem>
-        <MenuItem onClick={handleDeleteFromMenu}>Delete</MenuItem>
-      </Menu>
     </>
   );
 };

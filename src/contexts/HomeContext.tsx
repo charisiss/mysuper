@@ -68,6 +68,7 @@ interface HomeContextValue {
   modalOpen: boolean;
   currentProduct?: Product;
   sortedAvailableProducts: Product[];
+  availableCategories: string[];
   voiceControls: VoiceControls;
   voiceError: string | null;
   voiceMessage: string | null;
@@ -86,6 +87,7 @@ interface HomeContextValue {
     list: "shopping" | "offer" | "available",
   ) => Promise<void>;
   handleSaveProduct: (product: Product) => Promise<void>;
+  handleCreateCategory: (categoryName: string) => Promise<void>;
   handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleTabChange: (tab: HomeTab) => void;
   calculateTotalCost: (products: Product[]) => number;
@@ -190,6 +192,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
   const [shoppingList, setShoppingList] = useState<Product[]>([]);
   const [offerList, setOfferList] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<HomeTab>("products");
   const [modalOpen, setModalOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | undefined>();
@@ -234,6 +237,60 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     };
 
     fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "categories"));
+        const fetchedCategories = querySnapshot.docs.map((docSnapshot) => {
+          const data = docSnapshot.data();
+          return data.name as string;
+        });
+        
+        const defaultCategories = [
+          "Fruits",
+          "Vegetables",
+          "Bakery",
+          "Dairy",
+          "Pantry",
+          "Groceries",
+        ];
+        
+        // If no categories exist, initialize with defaults
+        if (fetchedCategories.length === 0) {
+          const initPromises = defaultCategories.map((name) =>
+            addDoc(collection(db, "categories"), {
+              name,
+              createdAt: new Date(),
+            })
+          );
+          await Promise.all(initPromises);
+          setCategories(defaultCategories.sort());
+          return;
+        }
+        
+        // Merge defaults with fetched categories, using Set to avoid duplicates
+        const allCategories = [
+          ...new Set([...defaultCategories, ...fetchedCategories]),
+        ].sort();
+        
+        setCategories(allCategories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        // Fallback to default categories on error
+        setCategories([
+          "Fruits",
+          "Vegetables",
+          "Bakery",
+          "Dairy",
+          "Pantry",
+          "Groceries",
+        ]);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   const calculateTotalCost = useCallback(
@@ -308,6 +365,52 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       setModalOpen(false);
     },
     [currentProduct],
+  );
+
+  const handleCreateCategory = useCallback(
+    async (categoryName: string) => {
+      const trimmedName = categoryName.trim();
+      if (!trimmedName) return;
+
+      // Check if category already exists
+      if (categories.includes(trimmedName)) {
+        return;
+      }
+
+      try {
+        // Check if category exists in database
+        const categoriesSnapshot = await getDocs(collection(db, "categories"));
+        const existingCategories = categoriesSnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return data.name as string;
+        });
+
+        if (existingCategories.includes(trimmedName)) {
+          // Category exists in DB but not in state, update state
+          setCategories((prev) => {
+            const updated = [...prev, trimmedName];
+            return updated.sort();
+          });
+          return;
+        }
+
+        // Create new category in database
+        await addDoc(collection(db, "categories"), {
+          name: trimmedName,
+          createdAt: new Date(),
+        });
+
+        // Update state
+        setCategories((prev) => {
+          const updated = [...prev, trimmedName];
+          return updated.sort();
+        });
+      } catch (error) {
+        console.error("Error creating category:", error);
+        throw error;
+      }
+    },
+    [categories],
   );
 
   const closeModal = useCallback(() => {
@@ -608,6 +711,10 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     [filteredProducts],
   );
 
+  const availableCategories = useMemo(() => {
+    return categories;
+  }, [categories]);
+
   const voiceControls = useMemo<VoiceControls>(
     () => ({
       isVoiceSupported,
@@ -628,6 +735,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       modalOpen,
       currentProduct,
       sortedAvailableProducts,
+      availableCategories,
       voiceControls,
       voiceError,
       voiceMessage,
@@ -637,6 +745,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       handleAddToList,
       handleClearList,
       handleSaveProduct,
+      handleCreateCategory,
       handleSearchChange,
       handleTabChange,
       calculateTotalCost,
@@ -651,6 +760,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       modalOpen,
       currentProduct,
       sortedAvailableProducts,
+      availableCategories,
       voiceControls,
       voiceError,
       voiceMessage,
@@ -660,6 +770,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       handleAddToList,
       handleClearList,
       handleSaveProduct,
+      handleCreateCategory,
       handleSearchChange,
       handleTabChange,
       calculateTotalCost,

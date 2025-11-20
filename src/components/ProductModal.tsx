@@ -10,16 +10,14 @@ interface ProductModalProps {
   onClose: () => void;
   onSave: (product: Product) => void;
   initialProduct?: Product;
+  availableCategories?: string[];
+  onCreateCategory?: (categoryName: string) => Promise<void>;
+  onDelete?: (
+    product: Product,
+    fromList: "available" | "shopping" | "offer",
+  ) => void | Promise<void>;
 }
 
-const CATEGORY_OPTIONS = [
-  "Fruits",
-  "Vegetables",
-  "Bakery",
-  "Dairy",
-  "Pantry",
-  "Groceries",
-];
 const ADD_NEW_CATEGORY_OPTION = "__add_new_category__";
 
 const ProductModal: React.FC<ProductModalProps> = ({
@@ -27,6 +25,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
   onClose,
   onSave,
   initialProduct,
+  availableCategories = [],
+  onCreateCategory,
+  onDelete,
 }) => {
   const [product, setProduct] = useState<Product>({
     id: "",
@@ -104,9 +105,32 @@ const ProductModal: React.FC<ProductModalProps> = ({
     setProduct((prev) => ({ ...prev, category: value }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    // If a new category was created, save it to the database first
+    if (
+      isAddingNewCategory &&
+      customCategory.trim() &&
+      onCreateCategory &&
+      !availableCategories.includes(customCategory.trim())
+    ) {
+      try {
+        await onCreateCategory(customCategory.trim());
+      } catch (error) {
+        console.error("Error creating category:", error);
+        // Continue anyway - the category will be saved with the product
+      }
+    }
+
     onSave(product);
     onClose();
+  };
+
+  const handleDelete = async () => {
+    if (initialProduct && onDelete) {
+      const fromList = initialProduct.fromList || "available";
+      await onDelete(initialProduct, fromList as "available" | "shopping" | "offer");
+      onClose();
+    }
   };
 
   const handleScan = async () => {
@@ -177,12 +201,6 @@ const ProductModal: React.FC<ProductModalProps> = ({
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-5 flex items-center gap-2">
-          <Image
-            src={"/images/mysuper.png"}
-            alt="My Super Image"
-            width={50}
-            height={50}
-          />
           <h6 className="text-xl font-bold">
             {initialProduct ? "Edit Product" : "New Product"}
           </h6>
@@ -240,14 +258,14 @@ const ProductModal: React.FC<ProductModalProps> = ({
           onChange={handleChange}
           margin="normal"
         >
-          {[
-            ...CATEGORY_OPTIONS,
-            ...(product.category &&
-            product.category.trim().length > 0 &&
-            !CATEGORY_OPTIONS.includes(product.category)
-              ? [product.category]
-              : []),
-          ].map((option) => (
+          {(() => {
+            const categorySet = new Set(availableCategories);
+            // Include current product's category if it's not already in the list
+            if (product.category && product.category.trim()) {
+              categorySet.add(product.category.trim());
+            }
+            return Array.from(categorySet).sort();
+          })().map((option) => (
             <MenuItem key={option} value={option}>
               {option}
             </MenuItem>
@@ -265,12 +283,23 @@ const ProductModal: React.FC<ProductModalProps> = ({
           />
         )}
 
-        <button
-          onClick={handleSave}
-          className="mt-4 w-full rounded-lg bg-primary p-4 font-bold uppercase text-white"
-        >
-          SAVE
-        </button>
+        <div className="mt-4 flex w-full gap-2">
+          
+          {initialProduct && onDelete && (
+            <button
+              onClick={handleDelete}
+              className="w-full rounded-lg border border-red-500 bg-white p-4 font-bold uppercase text-red-500 transition hover:bg-red-50"
+            >
+              DELETE
+            </button>
+          )}
+          <button
+            onClick={handleSave}
+            className="w-full rounded-lg bg-primary p-4 font-bold uppercase text-white"
+          >
+            SAVE
+          </button>
+        </div>
       </div>
     </div>
   );
