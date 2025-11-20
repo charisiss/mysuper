@@ -73,7 +73,12 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
           currentList="shopping"
         />
 
-        <div className="rounded-3xl bg-white/90 px-5 py-4 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+        <div
+          className="rounded-3xl bg-white/90 px-5 py-4 shadow-[0_8px_30px_rgba(0,0,0,0.04)] animate-fade-up animate-duration-500 animate-delay-200 animate-ease-out animate-fill-forwards animate-once opacity-0"
+          style={{
+            animationFillMode: "both",
+          }}
+        >
           <div className="flex items-center justify-between">
             <p className="text-lg font-semibold text-slate-900">Total</p>
             <p className="text-xl font-bold text-slate-900">
