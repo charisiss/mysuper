@@ -271,9 +271,9 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         }
         
         // Merge defaults with fetched categories, using Set to avoid duplicates
-        const allCategories = [
-          ...new Set([...defaultCategories, ...fetchedCategories]),
-        ].sort();
+        const allCategories = Array.from(
+          new Set([...defaultCategories, ...fetchedCategories])
+        ).sort();
         
         setCategories(allCategories);
       } catch (error) {

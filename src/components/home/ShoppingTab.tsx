@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 
-import ProductList from "@/components/ProductList";
+import ProductList, { ProductListHandle } from "@/components/ProductList";
 import { Product } from "@/types/Product";
 import TabHeader from "./TabHeader";
 import { VoiceControls } from "./VoiceToggleButton";
@@ -36,6 +36,9 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
   voiceControls,
   voiceError,
 }) => {
+  const productListRef = useRef<ProductListHandle>(null);
+  const [checkedCount, setCheckedCount] = useState(0);
+
   const currencyFormatter = React.useMemo(
     () =>
       new Intl.NumberFormat("en-US", {
@@ -47,6 +50,12 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
   );
 
   const formatPrice = (price: number) => currencyFormatter.format(price);
+
+  const handleClearChecked = async () => {
+    if (productListRef.current) {
+      productListRef.current.clearCheckedItems();
+    }
+  };
 
   return (
     <div className="flex flex-col">
@@ -64,6 +73,7 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
 
       <div className="flex flex-col gap-3 p-2.5">
         <ProductList
+          ref={productListRef}
           products={products}
           totalCost={totalCost}
           onEdit={onEdit}
@@ -71,6 +81,7 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
           onClearList={onClearList}
           onAddToList={onAddToList}
           currentList="shopping"
+          onCheckedCountChange={setCheckedCount}
         />
 
         <div
@@ -85,6 +96,14 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
               {formatPrice(totalCost)}
             </p>
           </div>
+          {checkedCount > 0 && (
+            <button
+              onClick={handleClearChecked}
+              className="mt-4 w-full rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-600 active:bg-red-700"
+            >
+              Clear All Selected ({checkedCount})
+            </button>
+          )}
         </div>
       </div>
     </div>

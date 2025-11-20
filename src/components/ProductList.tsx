@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle } from "react";
 import { Product } from "@/types/Product";
 import { IconButton, Checkbox, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -17,7 +17,7 @@ interface ProductListProps {
   onDelete: (
     product: Product,
     fromList: "available" | "shopping" | "offer",
-  ) => void;
+  ) => void | Promise<void>;
   onClearList: (
     list: "shopping" | "offer" | "available",
   ) => void | Promise<void>;
@@ -27,6 +27,12 @@ interface ProductListProps {
     quantity: number,
   ) => void;
   currentList: "shopping" | "offer" | "available";
+  onCheckedCountChange?: (count: number) => void;
+}
+
+export interface ProductListHandle {
+  clearCheckedItems: () => Promise<void>;
+  getCheckedCount: () => number;
 }
 
 const CATEGORY_KEYWORDS = [
@@ -64,7 +70,7 @@ const RoundedCheckbox = styled(Checkbox)({
   },
 });
 
-const ProductList: React.FC<ProductListProps> = ({
+const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
   products,
   totalCost,
   onEdit,
@@ -72,7 +78,8 @@ const ProductList: React.FC<ProductListProps> = ({
   onClearList,
   onAddToList,
   currentList,
-}) => {
+  onCheckedCountChange,
+}, ref) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedProduct, setSelectedProduct] = useState<null | Product>(null);
   const [listModalOpen, setListModalOpen] = useState(false);
@@ -84,6 +91,44 @@ const ProductList: React.FC<ProductListProps> = ({
     new Set(),
   );
   const modalRef = useRef<HTMLDivElement | null>(null);
+
+  // Notify parent when checked count changes
+  useEffect(() => {
+    if (onCheckedCountChange) {
+      onCheckedCountChange(checkedProducts.size);
+    }
+  }, [checkedProducts.size, onCheckedCountChange]);
+
+  // Clean up checked products that no longer exist
+  useEffect(() => {
+    const productIds = new Set(products.map((p) => p.id));
+    setCheckedProducts((prev) => {
+      const cleaned = new Set<string>();
+      prev.forEach((id) => {
+        if (productIds.has(id)) {
+          cleaned.add(id);
+        }
+      });
+      return cleaned;
+    });
+  }, [products]);
+
+  // Expose methods to parent via ref
+  useImperativeHandle(ref, () => ({
+    clearCheckedItems: async () => {
+      if (currentList === "available") return;
+      
+      const checkedProductIds = Array.from(checkedProducts);
+      const deletePromises = checkedProductIds
+        .map((productId) => products.find((p) => p.id === productId))
+        .filter((product): product is Product => product !== undefined)
+        .map((product) => onDelete(product, currentList));
+      
+      await Promise.all(deletePromises);
+      setCheckedProducts(new Set());
+    },
+    getCheckedCount: () => checkedProducts.size,
+  }));
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -356,6 +401,8 @@ const ProductList: React.FC<ProductListProps> = ({
 
     </>
   );
-};
+});
+
+ProductList.displayName = "ProductList";
 
 export default ProductList;
