@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Product } from "@/types/Product";
-import { IconButton, Checkbox, Menu, MenuItem } from "@mui/material";
+import { IconButton, Checkbox, Menu, MenuItem, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ClearIcon from "@mui/icons-material/Clear";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import CheckBoxOutlineBlankRoundedIcon from "@mui/icons-material/CheckBoxOutlineBlankRounded";
+import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
 import Image from "next/image";
 
 interface ProductListProps {
@@ -50,6 +52,16 @@ const resolveCategory = (product: Product) => {
   }
   return inferCategoryFromName(product.name);
 };
+
+const RoundedCheckbox = styled(Checkbox)({
+  color: "#00d6d6",
+  "&.Mui-checked": {
+    color: "#00d6d6",
+  },
+  "& .MuiSvgIcon-root": {
+    fontSize: 28,
+  },
+});
 
 const ProductList: React.FC<ProductListProps> = ({
   products,
@@ -228,9 +240,18 @@ const ProductList: React.FC<ProductListProps> = ({
               ) : (
                 <>
                   <div className="flex items-center space-x-4">
-                    <Checkbox
+                    <RoundedCheckbox
                       checked={checkedProducts.has(product.id)}
-                      className="accent-primary"
+                      className="!accent-primary !text-primary"
+                      icon={
+                        <CheckBoxOutlineBlankRoundedIcon
+                          sx={{ color: "#00d6d6", fontSize: 28 }}
+                          className="!text-primary"
+                        />
+                      }
+                      checkedIcon={
+                        <CheckBoxRoundedIcon sx={{ color: "#00d6d6", fontSize: 28 }} />
+                      }
                     />
                     <div className="flex flex-col gap-1">
                       <p className="text-base font-semibold text-slate-900">
