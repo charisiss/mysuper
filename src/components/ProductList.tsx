@@ -216,16 +216,18 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
           const displayPrice = formatPrice(productPrice * productQuantity);
           const isAvailableList = currentList === "available";
 
+          const shouldAnimate = index < 30;
+          
           return (
             <div
               key={product.id}
               role="button"
               tabIndex={0}
-              className="group flex w-full items-center justify-between rounded-3xl bg-white/90 px-5 py-4 text-left shadow-md transition animate-fade-up animate-duration-500 animate-ease-out"
-              style={{
+              className={`group flex w-full items-center justify-between rounded-3xl bg-white/90 px-5 py-4 text-left shadow-[0px_0px_6px_0px_rgba(0,_0,_0,_0.1)] transition ${shouldAnimate ? 'animate-fade-up animate-duration-500 animate-ease-out' : ''}`}
+              style={shouldAnimate ? {
                 animationDelay: `${index * 60}ms`,
                 animationFillMode: "backwards",
-              }}
+              } : undefined}
               onClick={() => handleCheckboxChange(product)}
               onKeyDown={(event) => {
                 if (event.key === "Enter" || event.key === " ") {
