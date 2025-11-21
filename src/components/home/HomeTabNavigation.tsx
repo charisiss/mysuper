@@ -32,7 +32,9 @@ const HomeTabNavigation: React.FC<HomeTabNavigationProps> = ({
             type="button"
             onClick={() => onSelect(tab.key)}
             className={`flex flex-1 flex-col items-center rounded-t-2xl pb-2 text-sm font-medium transition ${
-              activeTab === tab.key ? "text-primary bg-primary/10" : "text-gray-500"
+              activeTab === tab.key
+                ? "bg-gradient-to-r from-primary via-cyan-400 to-sky-500 text-white shadow-md shadow-primary/30"
+                : "text-gray-500 bg-transparent"
             }`}
             aria-pressed={activeTab === tab.key}
           >
@@ -42,12 +44,14 @@ const HomeTabNavigation: React.FC<HomeTabNavigationProps> = ({
               >
                 {React.createElement(iconMap[tab.key], {
                   className: `h-5 w-5 ${
-                    activeTab === tab.key ? "text-primary" : "text-gray-400"
+                    activeTab === tab.key ? "text-white" : "text-gray-400"
                   }`,
                 })}
               </span>
             )}
-            <span>{tab.label}</span>
+            <span className={activeTab === tab.key ? "text-white" : ""}>
+              {tab.label}
+            </span>
           </button>
         ))}
       </div>

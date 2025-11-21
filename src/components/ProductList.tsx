@@ -209,7 +209,7 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
 
   return (
     <>
-      <div className="flex flex-col gap-3 p-2.5">
+      <div className="flex flex-col gap-3">
         {products.map((product, index) => {
           const productQuantity = product.quantity || 1;
           const productPrice = parsePrice(product.price);
@@ -221,7 +221,7 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
               key={product.id}
               role="button"
               tabIndex={0}
-              className="group flex w-full items-center justify-between rounded-3xl bg-white/90 px-5 py-4 text-left shadow-lg transition hover:-translate-y-0.5 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] focus-visible:ring-2 focus-visible:ring-emerald-300 animate-fade-up animate-duration-500 animate-ease-out"
+              className="group flex w-full items-center justify-between rounded-3xl bg-white/90 px-5 py-4 text-left shadow-md transition animate-fade-up animate-duration-500 animate-ease-out"
               style={{
                 animationDelay: `${index * 60}ms`,
                 animationFillMode: "backwards",

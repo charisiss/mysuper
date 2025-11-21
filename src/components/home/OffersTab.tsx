@@ -71,7 +71,7 @@ const OffersTab: React.FC<OffersTabProps> = ({
         <p className="px-6 pb-2 text-sm text-red-600">{voiceError}</p>
       )}
 
-      <div className="flex flex-col gap-3 p-2.5">
+      <div className="flex flex-col gap-3 p-5">
         <ProductList
           ref={productListRef}
           products={products}
@@ -85,14 +85,14 @@ const OffersTab: React.FC<OffersTabProps> = ({
         />
 
         <div
-          className="rounded-3xl bg-white/90 px-5 py-4 shadow-[0_8px_30px_rgba(0,0,0,0.04)] animate-fade-up animate-duration-500 animate-delay-200 animate-ease-out animate-fill-forwards animate-once opacity-0"
+          className={`sticky bottom-20 bg-gradient-to-r from-primary via-cyan-400 to-sky-500 px-5 py-5 text-white shadow-xl shadow-primary/30 animate-fade-up animate-duration-500 animate-delay-200 animate-ease-out animate-fill-forwards animate-once opacity-0 ${checkedCount > 0 ? "rounded-2xl" : "rounded-3xl"}`}
           style={{
             animationFillMode: "both",
           }}
         >
           <div className="flex items-center justify-between">
-            <p className="text-lg font-semibold text-slate-900">Total</p>
-            <p className="text-xl font-bold text-slate-900">
+            <p className="text-lg font-semibold text-white/95">Total</p>
+            <p className="text-xl font-bold text-white">
               {formatPrice(totalCost)}
             </p>
           </div>

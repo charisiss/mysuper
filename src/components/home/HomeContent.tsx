@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import ProductModal from "@/components/ProductModal";
 import OffersTab from "@/components/home/OffersTab";
@@ -42,6 +42,12 @@ const HomeContent: React.FC = () => {
     calculateTotalCost,
     closeModal,
   } = useHomeContext();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0 });
+    }
+  }, [activeTab]);
 
   return (
     <div className="relative min-h-svh bg-gradient-to-b from-emerald-50/60 via-white to-white pb-24">

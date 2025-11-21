@@ -339,6 +339,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         ...product,
         category: product.category || DEFAULT_CATEGORY,
       };
+      const incomingQuantity = productWithCategory.quantity ?? 1;
 
       if (currentProduct) {
         if (productWithCategory.id) {
@@ -355,16 +356,49 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
           console.error("Product ID is missing");
         }
       } else {
-        const { id, ...productData } = productWithCategory;
-        const docRef = await addDoc(collection(db, "products"), productData);
-        const newProduct = { ...productWithCategory, id: docRef.id };
-        setAvailableProducts((prev) => [...prev, newProduct]);
+        const hasBarcode = Boolean(productWithCategory.barcode);
+        const normalizedName = normalizeString(productWithCategory.name);
+        const existingProduct = availableProducts.find((p) => {
+          if (hasBarcode && p.barcode) {
+            return p.barcode === productWithCategory.barcode;
+          }
+          return normalizeString(p.name) === normalizedName;
+        });
+
+        if (existingProduct) {
+          const updatedQuantity = (existingProduct.quantity ?? 1) + incomingQuantity;
+          await updateDoc(doc(db, "products", existingProduct.id), {
+            quantity: updatedQuantity,
+          });
+
+          setAvailableProducts((prev) =>
+            prev.map((p) =>
+              p.id === existingProduct.id ? { ...p, quantity: updatedQuantity } : p,
+            ),
+          );
+          setShoppingList((prev) =>
+            prev.map((p) =>
+              p.id === existingProduct.id ? { ...p, quantity: updatedQuantity } : p,
+            ),
+          );
+          setOfferList((prev) =>
+            prev.map((p) =>
+              p.id === existingProduct.id ? { ...p, quantity: updatedQuantity } : p,
+            ),
+          );
+        } else {
+          const { id, ...productData } = productWithCategory;
+          const payload = { ...productData, quantity: incomingQuantity };
+          const docRef = await addDoc(collection(db, "products"), payload);
+          const newProduct = { ...productWithCategory, id: docRef.id, quantity: incomingQuantity };
+          setAvailableProducts((prev) => [...prev, newProduct]);
+        }
       }
 
       setCurrentProduct(undefined);
       setModalOpen(false);
     },
-    [currentProduct],
+    [availableProducts, currentProduct],
   );
 
   const handleCreateCategory = useCallback(
@@ -430,23 +464,36 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   const handleAddToList = useCallback(
-    async (product: Product, listType: "shopping" | "offer", quantity: number) => {
+    async (
+      product: Product,
+      listType: "shopping" | "offer",
+      quantity: number,
+    ) => {
       const productWithCategory = {
         ...product,
         category: product.category || DEFAULT_CATEGORY,
       };
-      const setter =
-        listType === "shopping" ? setShoppingList : setOfferList;
+      const setter = listType === "shopping" ? setShoppingList : setOfferList;
       const currentList =
         listType === "shopping"
           ? latestListsRef.current.shoppingList
           : latestListsRef.current.offerList;
 
-      const existingProduct = currentList.find((p) => p.id === product.id);
+      const normalizedName = normalizeString(productWithCategory.name);
+      const hasBarcode = Boolean(productWithCategory.barcode);
+
+      const existingProduct = currentList.find((p) => {
+        if (p.id === product.id) return true;
+        if (hasBarcode && p.barcode) {
+          return p.barcode === productWithCategory.barcode;
+        }
+        return normalizeString(p.name) === normalizedName;
+      });
 
       if (existingProduct) {
-        const updatedQuantity =
-          existingProduct.quantity ? existingProduct.quantity + quantity : quantity;
+        const baseQuantity = existingProduct.quantity ?? 1;
+        const updatedQuantity = baseQuantity + quantity;
+
         await updateDoc(doc(db, "products", existingProduct.id), {
           quantity: updatedQuantity,
         });
@@ -457,7 +504,9 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         };
 
         setter((prev) =>
-          prev.map((item) => (item.id === existingProduct.id ? updatedProduct : item)),
+          prev.map((item) =>
+            item.id === existingProduct.id ? updatedProduct : item,
+          ),
         );
         return;
       }

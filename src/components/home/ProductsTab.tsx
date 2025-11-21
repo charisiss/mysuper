@@ -39,7 +39,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
         actionSlot={
           <button
             onClick={onAddProduct}
-            className="rounded-full bg-primary p-2.5 font-semibold text-white shadow-lg shadow-primary/30 transition hover:-translate-y-0.5 hover:shadow-primary/50"
+            className="rounded-full bg-gradient-to-r from-primary via-cyan-400 to-sky-500 p-2.5 font-semibold text-white shadow-xl shadow-primary/30 transition hover:-translate-y-0.5 hover:shadow-primary/50"
           >
             <PlusIcon className="h-5 w-5" />
           </button>
@@ -68,7 +68,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
         </label>
       </TabHeader>
 
-      <div className="px-4">
+      <div className="p-5">
         <ProductList
           products={products}
           onEdit={onEdit}
