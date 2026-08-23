@@ -27,6 +27,7 @@ interface ProductListProps {
     quantity: number,
   ) => void;
   currentList: "shopping" | "offer" | "available";
+  groupByCategory?: boolean;
   onCheckedCountChange?: (count: number) => void;
 }
 
@@ -78,6 +79,7 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
   onClearList,
   onAddToList,
   currentList,
+  groupByCategory = false,
   onCheckedCountChange,
 }, ref) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -131,7 +133,7 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
   }));
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: Event) => {
       if (
         modalRef.current &&
         !modalRef.current.contains(event.target as Node)
@@ -141,15 +143,21 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
     };
 
     if (listModalOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.addEventListener("pointerdown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("pointerdown", handleClickOutside);
     };
   }, [listModalOpen]);
+
+  const closeListModalIfBackdrop = (
+    event: React.MouseEvent<HTMLDivElement> | React.PointerEvent<HTMLDivElement>,
+  ) => {
+    if (event.target === event.currentTarget) {
+      setListModalOpen(false);
+    }
+  };
 
 
   const handleCheckboxChange = (product: Product) => {
@@ -210,7 +218,25 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
   return (
     <>
       <div className="flex flex-col gap-3">
-        {products.map((product, index) => {
+        {(groupByCategory
+          ? Array.from(
+              products.reduce((groups, product) => {
+                const category = resolveCategory(product);
+                const items = groups.get(category) ?? [];
+                items.push(product);
+                groups.set(category, items);
+                return groups;
+              }, new Map<string, Product[]>()),
+            )
+          : ([[null, products]] as [string | null, Product[]][])
+        ).map(([category, items]) => (
+          <div key={category ?? "all"} className="flex flex-col gap-3">
+            {category && (
+              <p className="px-1 pt-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                {category}
+              </p>
+            )}
+            {items.map((product, index) => {
           const productQuantity = product.quantity || 1;
           const productPrice = parsePrice(product.price);
           const displayPrice = formatPrice(productPrice * productQuantity);
@@ -313,23 +339,34 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
               )}
             </div>
           );
-        })}
+            })}
+          </div>
+        ))}
       </div>
 
       {listModalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-          onClick={() => setListModalOpen(false)}
+          onPointerDown={closeListModalIfBackdrop}
+          onClick={closeListModalIfBackdrop}
         >
           <div
             ref={modalRef}
             className="w-80 animate-fade-up rounded-2xl bg-white p-8 animate-duration-500 animate-once animate-ease-in-out"
+            onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between">
               <span className="flex items-center gap-2">
                 <span className="flex flex-col">
-                  <h2 className="text-2xl font-bold">{selectedProduct?.name}</h2>
+                  <h2 className="text-2xl font-bold">
+                    {selectedProduct?.fullName || selectedProduct?.name}
+                  </h2>
+                  {selectedProduct?.fullName && selectedProduct?.name && (
+                    <p className="mt-1 text-sm text-slate-500">
+                      {selectedProduct.name}
+                    </p>
+                  )}
                   <p className="">
                     {selectedProduct != undefined &&
                       formatPrice(parsePrice(selectedProduct.price || 0))}

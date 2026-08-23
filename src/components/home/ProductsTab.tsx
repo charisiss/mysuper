@@ -4,7 +4,7 @@ import React from "react";
 import ProductList from "@/components/ProductList";
 import { Product } from "@/types/Product";
 import TabHeader from "./TabHeader";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, LayersIcon } from "lucide-react";
 type ListType = "shopping" | "offer" | "available";
 
 interface ProductsTabProps {
@@ -12,6 +12,8 @@ interface ProductsTabProps {
   searchTerm: string;
   onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onAddProduct: () => void;
+  sortByCategory: boolean;
+  onToggleSortByCategory: () => void;
   onEdit: (product: Product) => void;
   onDelete: (product: Product, fromList: ListType) => void;
   onAddToList: (
@@ -27,6 +29,8 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
   searchTerm,
   onSearchChange,
   onAddProduct,
+  sortByCategory,
+  onToggleSortByCategory,
   onEdit,
   onDelete,
   onAddToList,
@@ -37,12 +41,27 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
       <TabHeader
         title="Products"
         actionSlot={
-          <button
-            onClick={onAddProduct}
-            className="rounded-full bg-gradient-to-r from-primary via-cyan-400 to-sky-500 p-2.5 font-semibold text-white shadow-xl shadow-primary/30 transition hover:-translate-y-0.5 hover:shadow-primary/50"
-          >
-            <PlusIcon className="h-5 w-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onToggleSortByCategory}
+              aria-pressed={sortByCategory}
+              title="Sort by category"
+              className={`rounded-full p-2.5 font-semibold shadow-sm transition hover:-translate-y-0.5 ${
+                sortByCategory
+                  ? "bg-primary text-white shadow-primary/30"
+                  : "border border-gray-200 bg-white text-slate-600"
+              }`}
+            >
+              <LayersIcon className="h-5 w-5" />
+            </button>
+            <button
+              onClick={onAddProduct}
+              className="rounded-full bg-gradient-to-r from-primary via-cyan-400 to-sky-500 p-2.5 font-semibold text-white shadow-xl shadow-primary/30 transition hover:-translate-y-0.5 hover:shadow-primary/50"
+            >
+              <PlusIcon className="h-5 w-5" />
+            </button>
+          </div>
         }
       >
         <label className="flex w-full items-center gap-3 rounded-2xl border border-gray-200 bg-white px-5 py-3 text-base text-slate-600 shadow-sm focus-within:border-emerald-300">
@@ -76,6 +95,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
           onClearList={onClearList}
           onAddToList={onAddToList}
           currentList="available"
+          groupByCategory={sortByCategory}
           totalCost={0}
         />
       </div>

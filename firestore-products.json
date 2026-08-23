@@ -1,0 +1,1271 @@
+[
+  {
+    "id": "0TJqYVIAK2wINQT8rwFB",
+    "name": "Χαρτομάντιλα κομοδίνου ",
+    "barcode": "5205717100042",
+    "price": "1",
+    "category": "Groceries",
+    "fromList": "shopping",
+    "quantity": "1"
+  },
+  {
+    "id": "1roMKLLhbbAKtUb5cn2i",
+    "name": "Άσπρο ξύδι ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "2SqKF75pOpWW4iqOhgpi",
+    "name": "Ντομάτες ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "2e2CE2DTj4XkljDAT636",
+    "name": "Μπανάνα ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "2eusROK1CwQQaode6MsS",
+    "name": "Σφουγγάρια",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "2uSbAq3qQcNfpyhDYjSh",
+    "name": "Ντεπον",
+    "barcode": "0",
+    "price": "3",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "3Vd0og6pd9eMMjb2a45S",
+    "name": "Ρύζι ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "shopping",
+    "quantity": "1"
+  },
+  {
+    "id": "4HqEyHAbCgJ3DqaxBsjz",
+    "name": "Nutella ",
+    "barcode": "0",
+    "price": 6.5,
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "4Ja8RGuqNeADVFFHMY67",
+    "name": "Χαρτομάντιλα κομοδίνου ",
+    "barcode": "5205717100042",
+    "price": "1",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "4Mt6RBZQIkEiaKAtnoua",
+    "name": "Vetex",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "5eTGULqLXsxT7M5tckhx",
+    "name": "Ρόκα ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "6BAU427AZVQi62gPzK0E",
+    "name": "Ντομάτες κομμένες σάλτσα ",
+    "barcode": "0",
+    "price": 1.5,
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "6MA34vAaze9RptO8ZylQ",
+    "name": "Μεμβράνη ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "6NKlcSeoE4gmVoHtPCKy",
+    "name": "Μπαχαρικά κότας ",
+    "barcode": "2",
+    "price": "0",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "6ZcWF7FofUVxqivbOFqB",
+    "name": "Κόκκινο κρασί",
+    "barcode": "0",
+    "price": "6",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "6mohFrHuwOWyPXIhhzWc",
+    "name": "Λάδι ",
+    "barcode": "0",
+    "price": "5",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "6ossOGc0gwQ5ZQM87SEf",
+    "name": "Μπαταρία 2032",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "6wcLOdNQL917aAlRDaXe",
+    "name": "Πορτοκαλάδα ",
+    "barcode": "5449000003232",
+    "price": "1.80",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "72o4Zt7hRQM8Bf1MzvlS",
+    "name": "Μπαταρίες μικρές",
+    "barcode": "0",
+    "price": "5.65",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "75JcAIL1Tog0IqnU2AOc",
+    "name": "Baking powder ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Bakery",
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "7SQH0FWnGZLjW0EUHEo5",
+    "name": "Βανίλια ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "7TXpnwttDAIY99UONI5S",
+    "name": "Μαρούλι",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "7v4lu1T9uiZwzuTyW2Cd",
+    "name": "Duck",
+    "barcode": "5000204164466",
+    "price": "3.14",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "81DGZw44VcDio14Wdroy",
+    "name": "Οινόπνευμα ",
+    "barcode": "0",
+    "price": "3",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "84vdMruGaCc3FFiiVxPG",
+    "name": "Κρεμμύδι κόκκινο ",
+    "barcode": "0",
+    "price": "1",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "88TC6m2hoy6stAZU1Hxm",
+    "name": "Μπασμάτι",
+    "barcode": "0",
+    "price": "1.50",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "8RRRL5bghQaoTZH3jI0c",
+    "name": "Μπατονέτες",
+    "barcode": "0",
+    "price": "1",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "8w39hwEScy7wnj0jSwlF",
+    "name": "Βασιλικός ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "AE6Wzx96g21szdo3K2l2",
+    "name": "Μπέικον ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "AcHQtCVS431H3gBNwir8",
+    "name": "Γλυκοπατάτες ",
+    "barcode": "0",
+    "price": "5",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "AkhNNlcne6qggo2mW6dF",
+    "name": "Ξεσκονόπανο",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "AyHFhFEqlM4skaydkFzf",
+    "name": "Τοματοπολτος",
+    "barcode": "0",
+    "price": "0",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "C6AyzAaSTvaKa6rnymZI",
+    "name": "Μάσκα μαλλιών ",
+    "barcode": "0",
+    "price": "3",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "CY2nkaa53wV3Nue1XWNx",
+    "name": "Nutella ",
+    "barcode": "0",
+    "price": 6.5,
+    "category": "Groceries",
+    "fromList": "offer",
+    "quantity": "1"
+  },
+  {
+    "id": "DHufud7sUGtaMdQl6xUq",
+    "name": "Μακαρόνια",
+    "barcode": "0",
+    "price": "1.50",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "EVVbez7zlkzjdt91uzNU",
+    "name": "Σκόρδο ",
+    "barcode": "0",
+    "price": "1",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "Ej4MyG9UvUqyc4i6jhHb",
+    "name": "Ποτό",
+    "barcode": "0",
+    "price": "25",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "F1WfkQlxr5LerrSe2cKU",
+    "name": "Αυγά ",
+    "barcode": "5201458200362",
+    "price": "2.28",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "F4gqyxltvsD5UgNcAEjy",
+    "name": "Σαπούνι ",
+    "barcode": "0",
+    "price": "1.20",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "FTUPXGzRytRlrklfjcjM",
+    "name": "Χαρτομάντιλα πακέτο ",
+    "barcode": "5200251194007",
+    "price": "1.60",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "FY7B9cSzdBzXQlx5qOZT",
+    "name": "Ξηρή μαγιά ",
+    "barcode": "0",
+    "price": "1",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "Ff64pOOcFHFR7XqN3Jj6",
+    "name": "Κύβος ζυμαρικών ",
+    "barcode": "0",
+    "price": "3.50",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "FhAmywm4TIadm5OCC2FW",
+    "name": "Καλαμπόκι ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "Fp7SgAAcpQ2nh6f9r24n",
+    "name": "Πατάτες",
+    "barcode": "0",
+    "price": "3",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "FtqBJW8isuR7WvNnyX3R",
+    "name": "Αρωματικό τουαλέτας",
+    "barcode": "0",
+    "price": "4",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "Gs7dT6UESrF7t16dKq1F",
+    "name": "Σαμπουάν για σώμα ",
+    "barcode": "0",
+    "price": "4",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "HB7k92NCPclI42mSDzvk",
+    "name": "Παγωτό σοκολάτα ",
+    "barcode": "5208046258019",
+    "price": "3.20",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "HVA0QtSHrd2GuCfvHxrB",
+    "name": "Κρεμμύδι κόκκινο ",
+    "barcode": "0",
+    "price": "1",
+    "category": "Groceries",
+    "fromList": "shopping",
+    "quantity": "1"
+  },
+  {
+    "id": "I2CzvJDzn5omOqV5hpsI",
+    "name": "Κοτόπουλο σνίτσελ ",
+    "barcode": "0",
+    "price": "5",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "JM1iD62oKTQZITdGKtxr",
+    "name": "Πατατοσαλάτα ",
+    "barcode": "0",
+    "price": "4",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "JkXkp5DUnuoSWvclHC7w",
+    "name": "Μουστάρδα",
+    "barcode": "5201080113245",
+    "price": "2.80",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "JnxfxpVAcb8Vg6PCQEy7",
+    "name": "Γάντια ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "K6Yu4r5l9NEVMbRVUvxQ",
+    "name": "Cif",
+    "barcode": "0",
+    "price": "1.50",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "KJaFSylIudsmBLURC0jX",
+    "name": "Μελι",
+    "barcode": "0",
+    "price": "5",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "MG1EEj5pEpKflXmMoGLS",
+    "name": "Τόνος ",
+    "barcode": "0",
+    "price": "5",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "MMbT6H1crmIZMPHTCx68",
+    "name": "Φιλαδέλφεια ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "MbL42pq2pH0r2YWQU3CR",
+    "name": "Μωρομάντηλα",
+    "barcode": "0",
+    "price": "3.5",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "Ny2zhAOr6sKLUN9RCCmV",
+    "name": "Κοτόπουλο στήθος ",
+    "barcode": "0",
+    "price": "5",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "O0aL51KjCeXafjl98XFP",
+    "name": "Κεφαλοτύρι ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "O3f49Y39np0XzR6I2neG",
+    "name": "Γάλα ",
+    "barcode": "5202632001003",
+    "price": "1.12",
+    "category": "Dairy",
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "OKC6PBvYs36WXPmTsuIU",
+    "name": "Δημητριακά ",
+    "barcode": "0",
+    "price": "5",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "Ogi0drmCmxX6nuqF2ijC",
+    "name": "Σοκολάτα ρόφημα ",
+    "barcode": "0",
+    "price": "3.00",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "Qwaax1mushdN8YrImfKL",
+    "name": "Παρμεζάνα ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "RDcBZaRcZj1wQXe6iExU",
+    "name": "Κρέμα γάλακτος ",
+    "barcode": "0",
+    "price": "1",
+    "category": "Dairy",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "RKm9sBxTIgsR0GgvQd23",
+    "name": "Ηλιέλαιο ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "RnOyQM0E14kTxJZep2nL",
+    "name": "Ανταλλακτικό Αρωματικού ",
+    "barcode": "0",
+    "price": "4",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "RpMvP9QP2VejmTSlEuYO",
+    "name": "Coca cola",
+    "barcode": "0",
+    "price": "0",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "RrBHORWg9Slyu8xWTbvX",
+    "name": "Λουκάνικα ",
+    "barcode": "0",
+    "price": "5",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "STS8H3JB5CzUeIwF0T2J",
+    "name": "Τσίχλες ",
+    "barcode": "0",
+    "price": "1.20",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "TXDlJEZTPZMCSdbS1ZFr",
+    "name": "Σακούλες σκουπιδιών ",
+    "barcode": "0",
+    "price": "1.40",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "TmjgxDVbpyLtvFAsBoWO",
+    "name": "Σοκολάτα",
+    "barcode": "0",
+    "price": "1.60",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "Tr8xq6Lk0gzgBvxyqNPn",
+    "name": "Πορτοκαλί ",
+    "barcode": "0",
+    "price": "0.40",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "UBHGpGqfHh8UAj33BD5p",
+    "name": "Αφρός μαλλιών ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "VKifGxDyXcC4fEAfA84M",
+    "name": "Χυμός λεμονιού ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "VR6MMUjfmJx229Vs79Bq",
+    "name": "Ρίγανη ",
+    "barcode": "0",
+    "price": "1",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "VTsuVYgo79Qw6iG4BHTt",
+    "name": "Γάλα κακάο ",
+    "barcode": "5200106870049",
+    "price": "1.80",
+    "category": "Dairy",
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "VqipFtoaWfW600PKr8UP",
+    "name": "Φέτα",
+    "barcode": "0",
+    "price": "0",
+    "category": "Dairy",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "W6Uv2YJc15MydEMii7vo",
+    "name": "Οδοντόκρεμα",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "WY55vu0I3S3nubqWzg4q",
+    "name": "Σακούλες μπάνιου ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "WqqCXMVNiSLsLg1ReFoV",
+    "name": "Παγίδες χρώματος ",
+    "barcode": "0",
+    "price": "6",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "XMwkDocmYVa6OaCZHCHc",
+    "name": "Μπάρες δημητριακών ",
+    "barcode": "0",
+    "price": 3.6,
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "XesUk6SkZjt5qu3gVWQN",
+    "name": "Σιμιγδάλι ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "Xgrfbkh3Mf2zm47mBiGV",
+    "name": "Ζαμπον",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "XsjwjTuPv2SRjlc5Dsfo",
+    "name": "Απορρυπαντικό ",
+    "barcode": "0",
+    "price": "6",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "YEsyGkYgjn1HAstxPFVO",
+    "name": "Μπαταρίες μεγάλες",
+    "barcode": "0",
+    "price": "5.65",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "Ybmh8vtAnvpUZHgAYjsc",
+    "name": "Μοσχάρι 500g",
+    "barcode": "0",
+    "price": "5",
+    "category": "Pantry",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "YlYSf1PuGQRmGKH9VE3G",
+    "name": "Αλεύρι ",
+    "barcode": "5203064007373",
+    "price": "1.65",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "ZCacplAuu063gyKqR1bK",
+    "name": "Πουρές",
+    "barcode": "0",
+    "price": "1.20",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "ZkScJOkhp0NHypao1fBM",
+    "name": "Χαρτοπετσέτες",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "ZuOkTiMaFlx5CH11q1tM",
+    "name": "Noodles",
+    "barcode": "0",
+    "price": "1.50",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "ZvG6MhF64olKA62NlxXl",
+    "name": "Ζαχαρη",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "apEob8I2qrxhou0NpQIx",
+    "name": "Μοτσαρέλα ",
+    "barcode": "0",
+    "price": "4",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "b1yyOk8kIfFxcd7Z6pL7",
+    "name": "Διπλογεμιστά ",
+    "barcode": "5201004042262",
+    "price": "1.22",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "bowg1aRYOFbTtrbdwWEE",
+    "name": "Σως τονοσαλατας",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "bqzXV2LybRNeWJHkx2Ym",
+    "name": "Χυμός ",
+    "barcode": "0",
+    "price": "1.80",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "cU4zKAdvajktIxkX2Uf1",
+    "name": "Κακάο ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "d2O09XIrJGltUFm1mV1Z",
+    "name": "Τυροκαφτερή",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "dqcIhglHGeFFF48NtaB5",
+    "name": "Κόκκινη σάλτσα",
+    "barcode": "0",
+    "price": "0",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "dtzAHuaq7aUzacbRd1VH",
+    "name": "Μπαταρία 2032",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "shopping",
+    "quantity": "1"
+  },
+  {
+    "id": "eMIZb6o0RC8SY1VrGeGQ",
+    "name": "Αντισηπτικό ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "eQRYHsncVxRezg0ZudLX",
+    "name": "Βούτυρο ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "eTMz4kKXvkQJUtwI0ZoW",
+    "name": "Κύβος κότας ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "ep4uiwttdd6fyshPyQl1",
+    "name": "Μερέντα ",
+    "barcode": "7622201126131",
+    "price": "5.50",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "fzKONfFzJxdK2Eww8Bv5",
+    "name": "Μουστάρδα",
+    "barcode": "5201080113245",
+    "price": "2.80",
+    "category": "Groceries",
+    "fromList": "offer",
+    "quantity": "1"
+  },
+  {
+    "id": "gnPkJBhZh9R0UBqcfzdL",
+    "name": "Κασερι ",
+    "barcode": "0",
+    "price": "3",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "h9QADlBQr1ZTp3jW9TkF",
+    "name": "Ρύζι ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "isgMSL06qFPgr1Dz4kof",
+    "name": "Πατάτες baby",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "jn8z1YX76BpKFkPf3iQ6",
+    "name": "Ξύδι ",
+    "barcode": "0",
+    "price": "01",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "jqRNNPVLJWwOau8N7PuM",
+    "name": "Κρεμμύδι ",
+    "barcode": "0",
+    "price": "0.30",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "kRRPltFVhaTegduqoFBJ",
+    "name": "Σκόρδο αποξηραμένο ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "l9A6Jw6iYHiAsQ6zP76U",
+    "name": "Farina Tipo 00",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "lEcAzxsZeUpgiPMDSWoy",
+    "name": "Πλαστικό wrap",
+    "barcode": "0",
+    "price": "4",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "lp7oqShD7jn597edvW47",
+    "name": "Σοκολατούχο Γάλα ",
+    "barcode": "0",
+    "price": 3.6,
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "ly5pjphDuxC5Har1Rsgk",
+    "name": "Μαγιονέζα ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "m42TWBhK9tUlJ7U2XOsQ",
+    "name": "Αμμωνία ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "mOBXCYKovczHMNZtixeU",
+    "name": "Κοτομπουκιες",
+    "barcode": "0",
+    "price": "4",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "o0gSBytKZmKp9Ba3sIfN",
+    "name": "Kloron",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "ogywBou7v2lBG66MzBgp",
+    "name": "Bbq",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "qZdpDyFbZ55nvuTwLhgE",
+    "name": "Κουβερτου τα Γάλακτος ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "r67YzsWWqeQEdIaigx3U",
+    "name": "Ψωμί τοστ",
+    "barcode": "0",
+    "price": "1.30",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "rR5hokPs1Fx0YhNrSn2n",
+    "name": "Popcorn ",
+    "barcode": "0",
+    "price": "1",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "rVufYykWgyT8T6IF1IZG",
+    "name": "Κιμάς 1kg",
+    "barcode": "0",
+    "price": "10",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "rhLVeTYiCGhNO0EGiKXi",
+    "name": "Supline σπρέι ",
+    "barcode": "0",
+    "price": "3",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "sWPIGUDpBPQxwJVq0Y1V",
+    "name": "Σαλάμι ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "tAhomWaCCPJKkxXXRtIK",
+    "name": "Πτι Μπερ ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "tDxoHZL0BwesHsSIMxqY",
+    "name": "Αζαξ",
+    "barcode": "0",
+    "price": "0",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "u5BBluBRrjonyAnASxUa",
+    "name": "Καρότα ",
+    "barcode": "0",
+    "price": "0",
+    "category": "Vegetables",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "u9SLSI15ENPFRCUiYbdG",
+    "name": "Μαλακτικό ρούχων ",
+    "barcode": "0",
+    "price": "4",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "vYaM4uOToMksQretU9XT",
+    "name": "Νυχάκι",
+    "barcode": "0",
+    "price": "1.50",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "vlch3S78xtrs8Njnxsk2",
+    "name": "Σακούλες Σκούπας",
+    "barcode": "0",
+    "price": "4",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "vsjuUYT8QgoOZRQUBDpn",
+    "name": "Χαρτί υγείας",
+    "barcode": "0",
+    "price": "1",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "wdZksr3XKOzqcwL9jK3W",
+    "name": "Κυβος λαχανικών ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "wwOw7Ph47PcAM1yJRJlh",
+    "name": "Philadelphia",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "xHuV8tb2AbS3KHYaFcJU",
+    "name": "Fanta zero",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "y2UfSvlu5WSzyuc3FT9E",
+    "name": "Αποσμητικο",
+    "barcode": "0",
+    "price": "2",
+    "category": "Bakery",
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "y37TkwgrgYLSbNr6XUmr",
+    "name": "Γιαούρτι ",
+    "barcode": "0",
+    "price": "1.60",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "yvryQHttAHymryQgYxsO",
+    "name": "Λεμόνι ",
+    "barcode": "0",
+    "price": "0.40",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "yzGzpGgz8BBpBGYmXmSt",
+    "name": "Χαρτί κουζίνας ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  },
+  {
+    "id": "zIabCJrOjkqMgR1YUhKL",
+    "name": "Πιπεριές ",
+    "barcode": "0",
+    "price": "3",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "zRhE3GB5A5cGyWgEiTf5",
+    "name": "Τορτίγια ",
+    "barcode": "0",
+    "price": "2",
+    "category": "Groceries",
+    "fromList": "available",
+    "quantity": "1"
+  },
+  {
+    "id": "zk2qZoB43T4wMWcBKRh4",
+    "name": "Σως μουστάρδας ",
+    "barcode": "0",
+    "price": "2",
+    "category": null,
+    "fromList": "available",
+    "quantity": null
+  }
+]

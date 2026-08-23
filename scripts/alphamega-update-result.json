@@ -1,0 +1,1112 @@
+{
+  "updated": [
+    {
+      "id": "0TJqYVIAK2wINQT8rwFB",
+      "old": "Χαρτομάντιλα κομοδίνου",
+      "new": "Αλφαμέγα Χαρτομάντηλα 2 φύλλα 2+1 Δώρο 150 τεμ.",
+      "price": 3.0,
+      "category": "Household"
+    },
+    {
+      "id": "1roMKLLhbbAKtUb5cn2i",
+      "old": "Άσπρο ξύδι",
+      "new": "Platanis Λευκό Ξύδι 500 ml",
+      "price": 0.95,
+      "category": "Pantry"
+    },
+    {
+      "id": "2SqKF75pOpWW4iqOhgpi",
+      "old": "Ντομάτες",
+      "new": "Συσκευασμένες Τομάτες 1100 g",
+      "price": 3.58,
+      "category": "Vegetables"
+    },
+    {
+      "id": "2e2CE2DTj4XkljDAT636",
+      "old": "Μπανάνα",
+      "new": "Μπανάνες Chiquita 1 kg",
+      "price": 2.29,
+      "category": "Fruits"
+    },
+    {
+      "id": "2eusROK1CwQQaode6MsS",
+      "old": "Σφουγγάρια",
+      "new": "Αλφαμέγα Σφουγγαράκια Κουζίνας 10 τεμ.",
+      "price": 1.39,
+      "category": "Household"
+    },
+    {
+      "id": "3Vd0og6pd9eMMjb2a45S",
+      "old": "Ρύζι",
+      "new": "3A Ρύζι Γλασσέ 1 kg",
+      "price": 2.45,
+      "category": "Pantry"
+    },
+    {
+      "id": "4HqEyHAbCgJ3DqaxBsjz",
+      "old": "Nutella",
+      "new": "Nutella Κρέμα Φουντουκιού και Κακάο 200 g",
+      "price": 2.99,
+      "category": "Pantry"
+    },
+    {
+      "id": "4Ja8RGuqNeADVFFHMY67",
+      "old": "Χαρτομάντιλα κομοδίνου",
+      "new": "Αλφαμέγα Χαρτομάντηλα 2 φύλλα 2+1 Δώρο 150 τεμ.",
+      "price": 3.0,
+      "category": "Household"
+    },
+    {
+      "id": "6BAU427AZVQi62gPzK0E",
+      "old": "Ντομάτες κομμένες σάλτσα",
+      "new": "Μιτσίδης Ψιλοκομμένες Ντομάτες 400 g",
+      "price": 1.2,
+      "category": "Pantry"
+    },
+    {
+      "id": "6ossOGc0gwQ5ZQM87SEf",
+      "old": "Μπαταρία 2032",
+      "new": "Duracell 3V Lithium CR2032 2 τεμ.",
+      "price": 1.99,
+      "category": "Household"
+    },
+    {
+      "id": "81DGZw44VcDio14Wdroy",
+      "old": "Οινόπνευμα",
+      "new": "Conal 70% Vol Αντισηπτικό Οινόπνευμα Σπρέι 110 ml",
+      "price": 1.79,
+      "category": "Personal Care"
+    },
+    {
+      "id": "84vdMruGaCc3FFiiVxPG",
+      "old": "Κρεμμύδι κόκκινο",
+      "new": "Κρεμμύδια Κόκκινα 500 g",
+      "price": 0.93,
+      "category": "Vegetables"
+    },
+    {
+      "id": "88TC6m2hoy6stAZU1Hxm",
+      "old": "Μπασμάτι",
+      "new": "Αλφαμέγα Ρύζι Μπασμάτι 1 kg",
+      "price": 2.99,
+      "category": "Pantry"
+    },
+    {
+      "id": "AyHFhFEqlM4skaydkFzf",
+      "old": "Τοματοπολτος",
+      "new": "Mutti Ντοματοπολτός 140 g",
+      "price": 1.39,
+      "category": "Pantry"
+    },
+    {
+      "id": "CY2nkaa53wV3Nue1XWNx",
+      "old": "Nutella",
+      "new": "Nutella Κρέμα Φουντουκιού και Κακάο 200 g",
+      "price": 2.99,
+      "category": "Pantry"
+    },
+    {
+      "id": "DHufud7sUGtaMdQl6xUq",
+      "old": "Μακαρόνια",
+      "new": "Μιτσίδης Μακαρόνια Σπαγέττι 500 g",
+      "price": 1.35,
+      "category": "Pantry"
+    },
+    {
+      "id": "EVVbez7zlkzjdt91uzNU",
+      "old": "Σκόρδο",
+      "new": "Σκόρδο 80 g",
+      "price": 0.54,
+      "category": "Vegetables"
+    },
+    {
+      "id": "F1WfkQlxr5LerrSe2cKU",
+      "old": "Αυγά",
+      "new": "Αλφαμέγα Βιολογικά Μεγάλα Αυγά 6 τεμ.",
+      "price": 3.79,
+      "category": "Dairy"
+    },
+    {
+      "id": "FTUPXGzRytRlrklfjcjM",
+      "old": "Χαρτομάντιλα πακέτο",
+      "new": "Kleenex Travel Tissues 3 Φύλλα 40 τεμ.",
+      "price": 1.65,
+      "category": "Household"
+    },
+    {
+      "id": "Fp7SgAAcpQ2nh6f9r24n",
+      "old": "Πατάτες",
+      "new": "Φρέσκες Πατάτες 2 kg",
+      "price": 1.98,
+      "category": "Vegetables"
+    },
+    {
+      "id": "HVA0QtSHrd2GuCfvHxrB",
+      "old": "Κρεμμύδι κόκκινο",
+      "new": "Κρεμμύδια Κόκκινα 500 g",
+      "price": 0.93,
+      "category": "Vegetables"
+    },
+    {
+      "id": "JkXkp5DUnuoSWvclHC7w",
+      "old": "Μουστάρδα",
+      "new": "Deroni Μουστάρδα Κλασική 200 g",
+      "price": 1.59,
+      "category": "Pantry"
+    },
+    {
+      "id": "K6Yu4r5l9NEVMbRVUvxQ",
+      "old": "Cif",
+      "new": "Cif Cleanboost Κλασική Κρέμα Λεμόνι 500 ml",
+      "price": 2.1,
+      "category": "Cleaning"
+    },
+    {
+      "id": "MMbT6H1crmIZMPHTCx68",
+      "old": "Φιλαδέλφεια",
+      "new": "Philadelphia Original Τυρί Κρέμα 200 g",
+      "price": 2.15,
+      "category": "Dairy"
+    },
+    {
+      "id": "O3f49Y39np0XzR6I2neG",
+      "old": "Γάλα",
+      "new": "Χαραλαμπίδης Κρίστης Φρέσκο Γάλα 3% 1 L",
+      "price": 1.5,
+      "category": "Dairy"
+    },
+    {
+      "id": "RDcBZaRcZj1wQXe6iExU",
+      "old": "Κρέμα γάλακτος",
+      "new": "Arla Κρέμα Γάλακτος 35% Λιπαρά 200 ml",
+      "price": 2.15,
+      "category": "Dairy"
+    },
+    {
+      "id": "TXDlJEZTPZMCSdbS1ZFr",
+      "old": "Σακούλες σκουπιδιών",
+      "new": "Αλφαμέγα Σακούλες τουαλέτας/γραφείου 9 L 20 τεμ.",
+      "price": 0.59,
+      "category": "Household"
+    },
+    {
+      "id": "Tr8xq6Lk0gzgBvxyqNPn",
+      "old": "Πορτοκαλί",
+      "new": "Πορτοκάλια για Χυμό 1.2 kg",
+      "price": 1.79,
+      "category": "Fruits"
+    },
+    {
+      "id": "VqipFtoaWfW600PKr8UP",
+      "old": "Φέτα",
+      "new": "Αλάμπρα Φέτα Π.Ο.Π Χωρίς Λακτόζη 200 g",
+      "price": 3.19,
+      "category": "Dairy"
+    },
+    {
+      "id": "W6Uv2YJc15MydEMii7vo",
+      "old": "Οδοντόκρεμα",
+      "new": "Colgate Max Fresh Cooling Crystals 75 ml",
+      "price": 2.55,
+      "category": "Personal Care"
+    },
+    {
+      "id": "WY55vu0I3S3nubqWzg4q",
+      "old": "Σακούλες μπάνιου",
+      "new": "Αλφαμέγα Σακούλες τουαλέτας/γραφείου 9 L 20 τεμ.",
+      "price": 0.59,
+      "category": "Household"
+    },
+    {
+      "id": "XesUk6SkZjt5qu3gVWQN",
+      "old": "Σιμιγδάλι",
+      "new": "Μιτσίδης Σιμιγδάλι 1 kg",
+      "price": 1.75,
+      "category": "Pantry"
+    },
+    {
+      "id": "YlYSf1PuGQRmGKH9VE3G",
+      "old": "Αλεύρι",
+      "new": "Μιτσίδης Αλεύρι Φαρίνα Ζαχαροπλαστικής 1 kg",
+      "price": 1.49,
+      "category": "Bakery"
+    },
+    {
+      "id": "ZkScJOkhp0NHypao1fBM",
+      "old": "Χαρτοπετσέτες",
+      "new": "Αλφαμέγα Άσπρες Χαρτοπετσέτες 33x33 cm 70 τεμ.",
+      "price": 0.79,
+      "category": "Household"
+    },
+    {
+      "id": "ZvG6MhF64olKA62NlxXl",
+      "old": "Ζαχαρη",
+      "new": "Αλφαμέγα Λευκή Κρυστάλλινη Ζάχαρη 1 kg",
+      "price": 0.99,
+      "category": "Pantry"
+    },
+    {
+      "id": "apEob8I2qrxhou0NpQIx",
+      "old": "Μοτσαρέλα",
+      "new": "AB Μαλακό τυρί Mozzarella σε Φέτες 200 g",
+      "price": 2.19,
+      "category": "Dairy"
+    },
+    {
+      "id": "dtzAHuaq7aUzacbRd1VH",
+      "old": "Μπαταρία 2032",
+      "new": "Duracell 3V Lithium CR2032 2 τεμ.",
+      "price": 1.99,
+      "category": "Household"
+    },
+    {
+      "id": "fzKONfFzJxdK2Eww8Bv5",
+      "old": "Μουστάρδα",
+      "new": "Deroni Μουστάρδα Κλασική 200 g",
+      "price": 1.59,
+      "category": "Pantry"
+    },
+    {
+      "id": "h9QADlBQr1ZTp3jW9TkF",
+      "old": "Ρύζι",
+      "new": "3A Ρύζι Γλασσέ 1 kg",
+      "price": 2.45,
+      "category": "Pantry"
+    },
+    {
+      "id": "jn8z1YX76BpKFkPf3iQ6",
+      "old": "Ξύδι",
+      "new": "Platanis Λευκό Ξύδι 500 ml",
+      "price": 0.95,
+      "category": "Pantry"
+    },
+    {
+      "id": "l9A6Jw6iYHiAsQ6zP76U",
+      "old": "Farina Tipo 00",
+      "new": "Μιτσίδης Αλεύρι Φαρίνα Ζαχαροπλαστικής 1 kg",
+      "price": 1.49,
+      "category": "Bakery"
+    },
+    {
+      "id": "ly5pjphDuxC5Har1Rsgk",
+      "old": "Μαγιονέζα",
+      "new": "Αλφαμέγα Μαγιονέζα 475 g",
+      "price": 2.59,
+      "category": "Pantry"
+    },
+    {
+      "id": "u5BBluBRrjonyAnASxUa",
+      "old": "Καρότα",
+      "new": "Fresh Land Επιλεγμένα Καρότα 750 g",
+      "price": 1.46,
+      "category": "Vegetables"
+    },
+    {
+      "id": "vsjuUYT8QgoOZRQUBDpn",
+      "old": "Χαρτί υγείας",
+      "new": "Αλφαμέγα Χαρτί Υγείας 4 Φύλλα 10 ρολά",
+      "price": 3.99,
+      "category": "Household"
+    },
+    {
+      "id": "wwOw7Ph47PcAM1yJRJlh",
+      "old": "Philadelphia",
+      "new": "Philadelphia Original Τυρί Κρέμα 200 g",
+      "price": 2.15,
+      "category": "Dairy"
+    },
+    {
+      "id": "xHuV8tb2AbS3KHYaFcJU",
+      "old": "Fanta zero",
+      "new": "Fanta Πορτοκαλάδα Zero 330 ml",
+      "price": 0.8,
+      "category": "Beverages"
+    },
+    {
+      "id": "y37TkwgrgYLSbNr6XUmr",
+      "old": "Γιαούρτι",
+      "new": "Αλφαμέγα Στραγγιστό Γιαούρτι 0% Λιπαρά 450 g",
+      "price": 1.99,
+      "category": "Dairy"
+    },
+    {
+      "id": "yvryQHttAHymryQgYxsO",
+      "old": "Λεμόνι",
+      "new": "Εισαγόμενα Λεμόνια 500 g",
+      "price": 1.43,
+      "category": "Fruits"
+    },
+    {
+      "id": "yzGzpGgz8BBpBGYmXmSt",
+      "old": "Χαρτί κουζίνας",
+      "new": "Αλφαμέγα Χαρτί Κουζίνας 600 g",
+      "price": 1.99,
+      "category": "Household"
+    },
+    {
+      "id": "zIabCJrOjkqMgR1YUhKL",
+      "old": "Πιπεριές",
+      "new": "Συσκευασμένες Χρωματιστές Πιπεριές 700 g",
+      "price": 4.17,
+      "category": "Vegetables"
+    },
+    {
+      "id": "6mohFrHuwOWyPXIhhzWc",
+      "old": "Λάδι",
+      "new": "Melody Εξαιρετικό Παρθένο Ελαιόλαδο 1 L",
+      "price": 7.49,
+      "category": "Pantry"
+    },
+    {
+      "id": "6wcLOdNQL917aAlRDaXe",
+      "old": "Πορτοκαλάδα",
+      "new": "Fanta Πορτοκαλάδα 330 ml",
+      "price": 0.8,
+      "category": "Beverages"
+    },
+    {
+      "id": "75JcAIL1Tog0IqnU2AOc",
+      "old": "Baking powder",
+      "new": "Royal Baking Powder 113 g",
+      "price": 1.49,
+      "category": "Pantry"
+    },
+    {
+      "id": "7v4lu1T9uiZwzuTyW2Cd",
+      "old": "Duck",
+      "new": "Duck Deep Action Gel Marine Ocean 750 ml",
+      "price": 1.89,
+      "category": "Cleaning"
+    },
+    {
+      "id": "AE6Wzx96g21szdo3K2l2",
+      "old": "Μπέικον",
+      "new": "Χρυσοδάλια Μπέικον σε Φέτες 150 g",
+      "price": 1.95,
+      "category": "Dairy"
+    },
+    {
+      "id": "F4gqyxltvsD5UgNcAEjy",
+      "old": "Σαπούνι",
+      "new": "Palmolive Naturals Κρεμοσάπουνο Γάλα & Μέλι Ανταλλακτικό 900 ml",
+      "price": 3.39,
+      "category": "Personal Care"
+    },
+    {
+      "id": "KJaFSylIudsmBLURC0jX",
+      "old": "Μελι",
+      "new": "Αλφαμέγα Μέλι 475 g",
+      "price": 3.19,
+      "category": "Pantry"
+    },
+    {
+      "id": "MG1EEj5pEpKflXmMoGLS",
+      "old": "Τόνος",
+      "new": "Πλώρη Τόνος σε Ηλιέλαιο Τεμαχισμένος 3x80 g",
+      "price": 3.29,
+      "category": "Pantry"
+    },
+    {
+      "id": "RKm9sBxTIgsR0GgvQd23",
+      "old": "Ηλιέλαιο",
+      "new": "Αλφαμέγα Ηλιέλαιο 1 L",
+      "price": 2.39,
+      "category": "Pantry"
+    },
+    {
+      "id": "RpMvP9QP2VejmTSlEuYO",
+      "old": "Coca cola",
+      "new": "Coca-Cola Original Taste 1 L",
+      "price": 1.59,
+      "category": "Beverages"
+    },
+    {
+      "id": "RrBHORWg9Slyu8xWTbvX",
+      "old": "Λουκάνικα",
+      "new": "Αλφαμέγα Λουκάνικα Τύπου Φρανκφούρτης 250 g",
+      "price": 1.99,
+      "category": "Dairy"
+    },
+    {
+      "id": "VR6MMUjfmJx229Vs79Bq",
+      "old": "Ρίγανη",
+      "new": "Carnation Spices Ρίγανη 30 g",
+      "price": 1.35,
+      "category": "Pantry"
+    },
+    {
+      "id": "VTsuVYgo79Qw6iG4BHTt",
+      "old": "Γάλα κακάο",
+      "new": "Λανίτης Kiddo Γάλα Σοκολάτας 250 ml",
+      "price": 0.79,
+      "category": "Dairy"
+    },
+    {
+      "id": "Xgrfbkh3Mf2zm47mBiGV",
+      "old": "Ζαμπον",
+      "new": "Αλφαμέγα Χαμ 150 g",
+      "price": 1.99,
+      "category": "Dairy"
+    },
+    {
+      "id": "XsjwjTuPv2SRjlc5Dsfo",
+      "old": "Απορρυπαντικό",
+      "new": "Eureka Massalias Κλασικό Υγρό Απορρυπαντικό 57 πλύσεις 2.592 L",
+      "price": 6.75,
+      "category": "Cleaning"
+    },
+    {
+      "id": "ZuOkTiMaFlx5CH11q1tM",
+      "old": "Noodles",
+      "new": "Mama Ανατολικά Στιγμιαία Νούντλς Πικάντικη Πιπεριά 90 g",
+      "price": 1.29,
+      "category": "Pantry"
+    },
+    {
+      "id": "bqzXV2LybRNeWJHkx2Ym",
+      "old": "Χυμός",
+      "new": "Agros 100% Χυμός Μήλο 1 L",
+      "price": 1.19,
+      "category": "Beverages"
+    },
+    {
+      "id": "eQRYHsncVxRezg0ZudLX",
+      "old": "Βούτυρο",
+      "new": "Lurpak Βούτυρο Ανάλατο 225 g",
+      "price": 3.65,
+      "category": "Dairy"
+    },
+    {
+      "id": "lp7oqShD7jn597edvW47",
+      "old": "Σοκολατούχο Γάλα",
+      "new": "Λανίτης Kiddo Γάλα Σοκολάτας 1 L",
+      "price": 2.05,
+      "category": "Dairy"
+    },
+    {
+      "id": "mOBXCYKovczHMNZtixeU",
+      "old": "Κοτομπουκιες",
+      "new": "Αλφαμέγα Κοτομπουκιές 500 g",
+      "price": 4.49,
+      "category": "Frozen"
+    },
+    {
+      "id": "ogywBou7v2lBG66MzBgp",
+      "old": "Bbq",
+      "new": "Heinz Σάλτσα Μπάρμπεκιου Κλασική 480 g",
+      "price": 3.99,
+      "category": "Pantry"
+    },
+    {
+      "id": "r67YzsWWqeQEdIaigx3U",
+      "old": "Ψωμί τοστ",
+      "new": "Αλφαμέγα Ψωμί Ολικής Αλέσεως σε Φέτες 500 g",
+      "price": 1.69,
+      "category": "Bakery"
+    },
+    {
+      "id": "sWPIGUDpBPQxwJVq0Y1V",
+      "old": "Σαλάμι",
+      "new": "Αλφαμέγα Σαλάμι Τύπου Ουγγαρίας 100 g",
+      "price": 2.19,
+      "category": "Dairy"
+    },
+    {
+      "id": "tAhomWaCCPJKkxXXRtIK",
+      "old": "Πτι Μπερ",
+      "new": "Παπαδοπούλου Μπισκότα Πτι-Μπερ 225 g",
+      "price": 1.15,
+      "category": "Pantry"
+    },
+    {
+      "id": "tDxoHZL0BwesHsSIMxqY",
+      "old": "Αζαξ",
+      "new": "Ajax Boost Καθαριστικό Πατώματος Σόδα & Λεμόνι 1 L",
+      "price": 1.89,
+      "category": "Cleaning"
+    },
+    {
+      "id": "zRhE3GB5A5cGyWgEiTf5",
+      "old": "Τορτίγια",
+      "new": "Αλφαμέγα 6 Τορτίγιας Ολικής Αλέσεως 360 g",
+      "price": 1.99,
+      "category": "Bakery"
+    }
+  ],
+  "flagged": [
+    {
+      "name": "Ντεπον",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Vetex",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Ρόκα",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μεμβράνη",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μπαχαρικά κότας",
+      "current_price": "0",
+      "barcode": "2",
+      "fromList": "available"
+    },
+    {
+      "name": "Κόκκινο κρασί",
+      "current_price": "6",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μπαταρίες μικρές",
+      "current_price": "5.65",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Βανίλια",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μαρούλι",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μπατονέτες",
+      "current_price": "1",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Βασιλικός",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Γλυκοπατάτες",
+      "current_price": "5",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Ξεσκονόπανο",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μάσκα μαλλιών",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Ποτό",
+      "current_price": "25",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Ξηρή μαγιά",
+      "current_price": "1",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κύβος ζυμαρικών",
+      "current_price": "3.50",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Καλαμπόκι",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Αρωματικό τουαλέτας",
+      "current_price": "4",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Σαμπουάν για σώμα",
+      "current_price": "4",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Παγωτό σοκολάτα",
+      "current_price": "3.20",
+      "barcode": "5208046258019",
+      "fromList": "available"
+    },
+    {
+      "name": "Κοτόπουλο σνίτσελ",
+      "current_price": "5",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Πατατοσαλάτα",
+      "current_price": "4",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Γάντια",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μωρομάντηλα",
+      "current_price": "3.5",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κοτόπουλο στήθος",
+      "current_price": "5",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κεφαλοτύρι",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Δημητριακά",
+      "current_price": "5",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Σοκολάτα ρόφημα",
+      "current_price": "3.00",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Παρμεζάνα",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Ανταλλακτικό Αρωματικού",
+      "current_price": "4",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Τσίχλες",
+      "current_price": "1.20",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Σοκολάτα",
+      "current_price": "1.60",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Αφρός μαλλιών",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Χυμός λεμονιού",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Παγίδες χρώματος",
+      "current_price": "6",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μπάρες δημητριακών",
+      "current_price": 3.6,
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μπαταρίες μεγάλες",
+      "current_price": "5.65",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μοσχάρι 500g",
+      "current_price": "5",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Πουρές",
+      "current_price": "1.20",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Διπλογεμιστά",
+      "current_price": "1.22",
+      "barcode": "5201004042262",
+      "fromList": "available"
+    },
+    {
+      "name": "Σως τονοσαλατας",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κακάο",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Τυροκαφτερή",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κόκκινη σάλτσα",
+      "current_price": "0",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Αντισηπτικό",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κύβος κότας",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μερέντα",
+      "current_price": "5.50",
+      "barcode": "7622201126131",
+      "fromList": "available"
+    },
+    {
+      "name": "Κασερι",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Πατάτες baby",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κρεμμύδι",
+      "current_price": "0.30",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Σκόρδο αποξηραμένο",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Πλαστικό wrap",
+      "current_price": "4",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Αμμωνία",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Kloron",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κουβερτου τα Γάλακτος",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Popcorn",
+      "current_price": "1",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κιμάς 1kg",
+      "current_price": "10",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Supline σπρέι",
+      "current_price": "3",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Μαλακτικό ρούχων",
+      "current_price": "4",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Νυχάκι",
+      "current_price": "1.50",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Σακούλες Σκούπας",
+      "current_price": "4",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Κυβος λαχανικών",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Αποσμητικο",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    },
+    {
+      "name": "Σως μουστάρδας",
+      "current_price": "2",
+      "barcode": "0",
+      "fromList": "available"
+    }
+  ],
+  "round2": [
+    {
+      "id": "6mohFrHuwOWyPXIhhzWc",
+      "old": "Λάδι",
+      "new": "Melody Εξαιρετικό Παρθένο Ελαιόλαδο 1 L",
+      "price": 7.49,
+      "category": "Pantry"
+    },
+    {
+      "id": "6wcLOdNQL917aAlRDaXe",
+      "old": "Πορτοκαλάδα",
+      "new": "Fanta Πορτοκαλάδα 330 ml",
+      "price": 0.8,
+      "category": "Beverages"
+    },
+    {
+      "id": "75JcAIL1Tog0IqnU2AOc",
+      "old": "Baking powder",
+      "new": "Royal Baking Powder 113 g",
+      "price": 1.49,
+      "category": "Pantry"
+    },
+    {
+      "id": "7v4lu1T9uiZwzuTyW2Cd",
+      "old": "Duck",
+      "new": "Duck Deep Action Gel Marine Ocean 750 ml",
+      "price": 1.89,
+      "category": "Cleaning"
+    },
+    {
+      "id": "AE6Wzx96g21szdo3K2l2",
+      "old": "Μπέικον",
+      "new": "Χρυσοδάλια Μπέικον σε Φέτες 150 g",
+      "price": 1.95,
+      "category": "Dairy"
+    },
+    {
+      "id": "F4gqyxltvsD5UgNcAEjy",
+      "old": "Σαπούνι",
+      "new": "Palmolive Naturals Κρεμοσάπουνο Γάλα & Μέλι Ανταλλακτικό 900 ml",
+      "price": 3.39,
+      "category": "Personal Care"
+    },
+    {
+      "id": "KJaFSylIudsmBLURC0jX",
+      "old": "Μελι",
+      "new": "Αλφαμέγα Μέλι 475 g",
+      "price": 3.19,
+      "category": "Pantry"
+    },
+    {
+      "id": "MG1EEj5pEpKflXmMoGLS",
+      "old": "Τόνος",
+      "new": "Πλώρη Τόνος σε Ηλιέλαιο Τεμαχισμένος 3x80 g",
+      "price": 3.29,
+      "category": "Pantry"
+    },
+    {
+      "id": "RKm9sBxTIgsR0GgvQd23",
+      "old": "Ηλιέλαιο",
+      "new": "Αλφαμέγα Ηλιέλαιο 1 L",
+      "price": 2.39,
+      "category": "Pantry"
+    },
+    {
+      "id": "RpMvP9QP2VejmTSlEuYO",
+      "old": "Coca cola",
+      "new": "Coca-Cola Original Taste 1 L",
+      "price": 1.59,
+      "category": "Beverages"
+    },
+    {
+      "id": "RrBHORWg9Slyu8xWTbvX",
+      "old": "Λουκάνικα",
+      "new": "Αλφαμέγα Λουκάνικα Τύπου Φρανκφούρτης 250 g",
+      "price": 1.99,
+      "category": "Dairy"
+    },
+    {
+      "id": "VR6MMUjfmJx229Vs79Bq",
+      "old": "Ρίγανη",
+      "new": "Carnation Spices Ρίγανη 30 g",
+      "price": 1.35,
+      "category": "Pantry"
+    },
+    {
+      "id": "VTsuVYgo79Qw6iG4BHTt",
+      "old": "Γάλα κακάο",
+      "new": "Λανίτης Kiddo Γάλα Σοκολάτας 250 ml",
+      "price": 0.79,
+      "category": "Dairy"
+    },
+    {
+      "id": "Xgrfbkh3Mf2zm47mBiGV",
+      "old": "Ζαμπον",
+      "new": "Αλφαμέγα Χαμ 150 g",
+      "price": 1.99,
+      "category": "Dairy"
+    },
+    {
+      "id": "XsjwjTuPv2SRjlc5Dsfo",
+      "old": "Απορρυπαντικό",
+      "new": "Eureka Massalias Κλασικό Υγρό Απορρυπαντικό 57 πλύσεις 2.592 L",
+      "price": 6.75,
+      "category": "Cleaning"
+    },
+    {
+      "id": "ZuOkTiMaFlx5CH11q1tM",
+      "old": "Noodles",
+      "new": "Mama Ανατολικά Στιγμιαία Νούντλς Πικάντικη Πιπεριά 90 g",
+      "price": 1.29,
+      "category": "Pantry"
+    },
+    {
+      "id": "bqzXV2LybRNeWJHkx2Ym",
+      "old": "Χυμός",
+      "new": "Agros 100% Χυμός Μήλο 1 L",
+      "price": 1.19,
+      "category": "Beverages"
+    },
+    {
+      "id": "eQRYHsncVxRezg0ZudLX",
+      "old": "Βούτυρο",
+      "new": "Lurpak Βούτυρο Ανάλατο 225 g",
+      "price": 3.65,
+      "category": "Dairy"
+    },
+    {
+      "id": "lp7oqShD7jn597edvW47",
+      "old": "Σοκολατούχο Γάλα",
+      "new": "Λανίτης Kiddo Γάλα Σοκολάτας 1 L",
+      "price": 2.05,
+      "category": "Dairy"
+    },
+    {
+      "id": "mOBXCYKovczHMNZtixeU",
+      "old": "Κοτομπουκιες",
+      "new": "Αλφαμέγα Κοτομπουκιές 500 g",
+      "price": 4.49,
+      "category": "Frozen"
+    },
+    {
+      "id": "ogywBou7v2lBG66MzBgp",
+      "old": "Bbq",
+      "new": "Heinz Σάλτσα Μπάρμπεκιου Κλασική 480 g",
+      "price": 3.99,
+      "category": "Pantry"
+    },
+    {
+      "id": "r67YzsWWqeQEdIaigx3U",
+      "old": "Ψωμί τοστ",
+      "new": "Αλφαμέγα Ψωμί Ολικής Αλέσεως σε Φέτες 500 g",
+      "price": 1.69,
+      "category": "Bakery"
+    },
+    {
+      "id": "sWPIGUDpBPQxwJVq0Y1V",
+      "old": "Σαλάμι",
+      "new": "Αλφαμέγα Σαλάμι Τύπου Ουγγαρίας 100 g",
+      "price": 2.19,
+      "category": "Dairy"
+    },
+    {
+      "id": "tAhomWaCCPJKkxXXRtIK",
+      "old": "Πτι Μπερ",
+      "new": "Παπαδοπούλου Μπισκότα Πτι-Μπερ 225 g",
+      "price": 1.15,
+      "category": "Pantry"
+    },
+    {
+      "id": "tDxoHZL0BwesHsSIMxqY",
+      "old": "Αζαξ",
+      "new": "Ajax Boost Καθαριστικό Πατώματος Σόδα & Λεμόνι 1 L",
+      "price": 1.89,
+      "category": "Cleaning"
+    },
+    {
+      "id": "zRhE3GB5A5cGyWgEiTf5",
+      "old": "Τορτίγια",
+      "new": "Αλφαμέγα 6 Τορτίγιας Ολικής Αλέσεως 360 g",
+      "price": 1.99,
+      "category": "Bakery"
+    }
+  ]
+}

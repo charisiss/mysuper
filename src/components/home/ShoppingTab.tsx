@@ -7,6 +7,7 @@ import { Product } from "@/types/Product";
 import TabHeader from "./TabHeader";
 import { VoiceControls } from "./VoiceToggleButton";
 import VoiceMicButton from "./VoiceMicButton";
+import { LayersIcon } from "lucide-react";
 
 interface ShoppingTabProps {
   products: Product[];
@@ -22,6 +23,8 @@ interface ShoppingTabProps {
     listType: "shopping" | "offer",
     quantity: number,
   ) => Promise<void> | void;
+  sortByCategory: boolean;
+  onToggleSortByCategory: () => void;
   voiceControls?: VoiceControls;
   voiceError?: string | null;
 }
@@ -33,6 +36,8 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
   onDelete,
   onClearList,
   onAddToList,
+  sortByCategory,
+  onToggleSortByCategory,
   voiceControls,
   voiceError,
 }) => {
@@ -61,7 +66,24 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
     <div className="flex flex-col">
       <TabHeader
         title="Shopping List"
-        actionSlot={<VoiceMicButton voiceControls={voiceControls} />}
+        actionSlot={
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onToggleSortByCategory}
+              aria-pressed={sortByCategory}
+              title="Sort by category"
+              className={`rounded-full p-2.5 font-semibold shadow-sm transition hover:-translate-y-0.5 ${
+                sortByCategory
+                  ? "bg-primary text-white shadow-primary/30"
+                  : "border border-gray-200 bg-white text-slate-600"
+              }`}
+            >
+              <LayersIcon className="h-5 w-5" />
+            </button>
+            <VoiceMicButton voiceControls={voiceControls} />
+          </div>
+        }
       >
         <p className="text-sm text-slate-500">
           {products.length} item{products.length === 1 ? "" : "s"}
@@ -81,6 +103,7 @@ const ShoppingTab: React.FC<ShoppingTabProps> = ({
           onClearList={onClearList}
           onAddToList={onAddToList}
           currentList="shopping"
+          groupByCategory={sortByCategory}
           onCheckedCountChange={setCheckedCount}
         />
 

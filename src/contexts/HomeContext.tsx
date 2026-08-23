@@ -68,6 +68,9 @@ interface HomeContextValue {
   modalOpen: boolean;
   currentProduct?: Product;
   sortedAvailableProducts: Product[];
+  sortedShoppingList: Product[];
+  sortByCategory: boolean;
+  toggleSortByCategory: () => void;
   availableCategories: string[];
   voiceControls: VoiceControls;
   voiceError: string | null;
@@ -197,6 +200,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | undefined>();
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortByCategory, setSortByCategory] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isVoiceSupported, setIsVoiceSupported] = useState(true);
   const [voiceError, setVoiceError] = useState<string | null>(null);
@@ -748,6 +752,7 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     return availableProducts.filter((product) =>
       [
         normalizeString(product.name),
+        normalizeString(product.fullName || ""),
         normalizeString(product.category || ""),
         normalizeString(product.id),
         product.barcode ? product.barcode.toString() : "",
@@ -755,10 +760,34 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     );
   }, [availableProducts, searchTerm]);
 
-  const sortedAvailableProducts = useMemo(
-    () => [...filteredProducts].sort((a, b) => a.name.localeCompare(b.name)),
-    [filteredProducts],
-  );
+  const sortProductsByCategory = useCallback((products: Product[]) => {
+    return [...products].sort((a, b) => {
+      const categoryA = (a.category || DEFAULT_CATEGORY).localeCompare(
+        b.category || DEFAULT_CATEGORY,
+      );
+      if (categoryA !== 0) return categoryA;
+      return a.name.localeCompare(b.name);
+    });
+  }, []);
+
+  const sortedAvailableProducts = useMemo(() => {
+    const products = [...filteredProducts];
+    if (sortByCategory) {
+      return sortProductsByCategory(products);
+    }
+    return products.sort((a, b) => a.name.localeCompare(b.name));
+  }, [filteredProducts, sortByCategory, sortProductsByCategory]);
+
+  const sortedShoppingList = useMemo(() => {
+    if (sortByCategory) {
+      return sortProductsByCategory(shoppingList);
+    }
+    return shoppingList;
+  }, [shoppingList, sortByCategory, sortProductsByCategory]);
+
+  const toggleSortByCategory = useCallback(() => {
+    setSortByCategory((prev) => !prev);
+  }, []);
 
   const availableCategories = useMemo(() => {
     return categories;
@@ -784,6 +813,9 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       modalOpen,
       currentProduct,
       sortedAvailableProducts,
+      sortedShoppingList,
+      sortByCategory,
+      toggleSortByCategory,
       availableCategories,
       voiceControls,
       voiceError,
@@ -809,6 +841,9 @@ export const HomeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       modalOpen,
       currentProduct,
       sortedAvailableProducts,
+      sortedShoppingList,
+      sortByCategory,
+      toggleSortByCategory,
       availableCategories,
       voiceControls,
       voiceError,

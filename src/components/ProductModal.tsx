@@ -33,6 +33,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
     id: "",
     barcode: 0,
     name: "",
+    fullName: "",
     price: 0,
     category: "Groceries",
     fromList: "available",
@@ -60,6 +61,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
           id: "",
           barcode: 0,
           name: "",
+          fullName: "",
           price: 0,
           category: "Groceries",
           fromList: "available",
@@ -193,11 +195,21 @@ const ProductModal: React.FC<ProductModalProps> = ({
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-      onClick={onClose}
+      onPointerDown={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
     >
       <div
         ref={modalRef}
         className="w-80 animate-fade-up rounded-lg bg-white p-8 animate-duration-500 animate-once animate-ease-in-out"
+        onPointerDown={(event) => event.stopPropagation()}
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-5 flex items-center gap-2">
@@ -235,6 +247,15 @@ const ProductModal: React.FC<ProductModalProps> = ({
           value={product.name}
           onChange={handleChange}
           margin="normal"
+        />
+        <TextField
+          fullWidth
+          label="Full name"
+          name="fullName"
+          value={product.fullName || ""}
+          onChange={handleChange}
+          margin="normal"
+          helperText="Official product name from the store"
         />
         <TextField
           fullWidth

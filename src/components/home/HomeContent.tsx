@@ -23,6 +23,7 @@ const HomeContent: React.FC = () => {
     shoppingList,
     offerList,
     sortedAvailableProducts,
+    sortedShoppingList,
     searchTerm,
     modalOpen,
     currentProduct,
@@ -31,6 +32,8 @@ const HomeContent: React.FC = () => {
     voiceError,
     voiceMessage,
     handleAddProduct,
+    sortByCategory,
+    toggleSortByCategory,
     handleEditProduct,
     handleDeleteProduct,
     handleAddToList,
@@ -54,12 +57,14 @@ const HomeContent: React.FC = () => {
       <div className="">
         {activeTab === "shopping" && (
           <ShoppingTab
-            products={shoppingList}
+            products={sortedShoppingList}
             totalCost={calculateTotalCost(shoppingList)}
             onEdit={handleEditProduct}
             onDelete={handleDeleteProduct}
             onClearList={handleClearList}
             onAddToList={handleAddToList}
+            sortByCategory={sortByCategory}
+            onToggleSortByCategory={toggleSortByCategory}
             voiceControls={voiceControls}
             voiceError={voiceError}
           />
@@ -84,6 +89,8 @@ const HomeContent: React.FC = () => {
             searchTerm={searchTerm}
             onSearchChange={handleSearchChange}
             onAddProduct={handleAddProduct}
+            sortByCategory={sortByCategory}
+            onToggleSortByCategory={toggleSortByCategory}
             onEdit={handleEditProduct}
             onDelete={handleDeleteProduct}
             onAddToList={handleAddToList}

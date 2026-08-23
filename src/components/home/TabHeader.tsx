@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+
 type TabHeaderProps = React.PropsWithChildren<{
   title: string | React.ReactNode;
   actionSlot?: React.ReactNode;
@@ -39,4 +40,3 @@ const TabHeader: React.FC<TabHeaderProps> = ({
 };
 
 export default TabHeader;
-
