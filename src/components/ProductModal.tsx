@@ -195,13 +195,10 @@ const ProductModal: React.FC<ProductModalProps> = ({
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-      onPointerDown={(event) => {
-        if (event.target === event.currentTarget) {
-          onClose();
-        }
-      }}
       onClick={(event) => {
         if (event.target === event.currentTarget) {
+          event.preventDefault();
+          event.stopPropagation();
           onClose();
         }
       }}
@@ -209,7 +206,6 @@ const ProductModal: React.FC<ProductModalProps> = ({
       <div
         ref={modalRef}
         className="w-80 animate-fade-up rounded-lg bg-white p-8 animate-duration-500 animate-once animate-ease-in-out"
-        onPointerDown={(event) => event.stopPropagation()}
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-5 flex items-center gap-2">

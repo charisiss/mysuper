@@ -1,66 +1,41 @@
 ﻿name,barcode,price,category,fromList,quantity,id
-Kloron,0,3,Groceries,available,1,o0gSBytKZmKp9Ba3sIfN
-Popcorn,0,1,,available,,rR5hokPs1Fx0YhNrSn2n
-Supline σπρέι,0,3,,available,,rhLVeTYiCGhNO0EGiKXi
-Vetex,0,2,Groceries,available,1,4Mt6RBZQIkEiaKAtnoua
-Αμμωνία,0,3,Groceries,available,1,m42TWBhK9tUlJ7U2XOsQ
-Ανταλλακτικό Αρωματικού,0,4,,available,,RnOyQM0E14kTxJZep2nL
-Αντισηπτικό,0,3,Groceries,available,1,eMIZb6o0RC8SY1VrGeGQ
-Αποσμητικο,0,2,Bakery,available,,y2UfSvlu5WSzyuc3FT9E
-Αρωματικό τουαλέτας,0,4,Groceries,available,1,FtqBJW8isuR7WvNnyX3R
-Αφρός μαλλιών,0,3,Groceries,available,1,UBHGpGqfHh8UAj33BD5p
-Βανίλια,0,2,Groceries,available,1,7SQH0FWnGZLjW0EUHEo5
-Βασιλικός,0,2,Groceries,available,1,8w39hwEScy7wnj0jSwlF
-Γάντια,0,2,,available,,JnxfxpVAcb8Vg6PCQEy7
-Γλυκοπατάτες,0,5,Groceries,available,1,AcHQtCVS431H3gBNwir8
-Δημητριακά,0,5,,available,,OKC6PBvYs36WXPmTsuIU
-Διπλογεμιστά,5201004042262,1.22,,available,,b1yyOk8kIfFxcd7Z6pL7
-Κακάο,0,2,,available,,cU4zKAdvajktIxkX2Uf1
-Καλαμπόκι,0,2,,available,,FhAmywm4TIadm5OCC2FW
-Κασερι,0,3,,available,,gnPkJBhZh9R0UBqcfzdL
-Κεφαλοτύρι,0,3,Groceries,available,1,O0aL51KjCeXafjl98XFP
-Κιμάς 1kg,0,10,Groceries,available,1,rVufYykWgyT8T6IF1IZG
-Κοτόπουλο σνίτσελ,0,5,,available,,I2CzvJDzn5omOqV5hpsI
-Κοτόπουλο στήθος,0,5,Groceries,available,1,Ny2zhAOr6sKLUN9RCCmV
-Κουβερτου τα Γάλακτος,0,2,,available,,qZdpDyFbZ55nvuTwLhgE
-Κρεμμύδι,0,0.30,,available,,jqRNNPVLJWwOau8N7PuM
-Κυβος λαχανικών,0,2,Groceries,available,1,wdZksr3XKOzqcwL9jK3W
-Κόκκινη σάλτσα,0,0,Groceries,available,1,dqcIhglHGeFFF48NtaB5
-Κόκκινο κρασί,0,6,Groceries,available,1,6ZcWF7FofUVxqivbOFqB
-Κύβος ζυμαρικών,0,3.50,,available,,Ff64pOOcFHFR7XqN3Jj6
-Κύβος κότας,0,2,Groceries,available,1,eTMz4kKXvkQJUtwI0ZoW
-Μάσκα μαλλιών,0,3,,available,,C6AyzAaSTvaKa6rnymZI
-Μαλακτικό ρούχων,0,4,Groceries,available,1,u9SLSI15ENPFRCUiYbdG
-Μαρούλι,0,2,Groceries,available,,7TXpnwttDAIY99UONI5S
-Μεμβράνη,0,2,,available,,6MA34vAaze9RptO8ZylQ
-Μερέντα,7622201126131,5.50,,available,,ep4uiwttdd6fyshPyQl1
-Μοσχάρι 500g,0,5,Pantry,available,1,Ybmh8vtAnvpUZHgAYjsc
-Μπάρες δημητριακών,0,3.6,Groceries,available,1,XMwkDocmYVa6OaCZHCHc
+Supline σπρέι,0,3.0,,available,,rhLVeTYiCGhNO0EGiKXi
+Vetex,0,2.0,Groceries,available,1.0,4Mt6RBZQIkEiaKAtnoua
+Ανταλλακτικό Αρωματικού,0,4.0,,available,,RnOyQM0E14kTxJZep2nL
+Αποσμητικο,0,2.0,Bakery,available,,y2UfSvlu5WSzyuc3FT9E
+Αρωματικό τουαλέτας,0,4.0,Groceries,available,1.0,FtqBJW8isuR7WvNnyX3R
+Βανίλια,0,2.0,Groceries,available,1.0,7SQH0FWnGZLjW0EUHEo5
+Βασιλικός,0,2.0,Groceries,available,1.0,8w39hwEScy7wnj0jSwlF
+Γάντια,0,2.0,,available,,JnxfxpVAcb8Vg6PCQEy7
+Κακάο,0,2.0,,available,,cU4zKAdvajktIxkX2Uf1
+Καλαμπόκι,0,2.0,,available,,FhAmywm4TIadm5OCC2FW
+Κασερι,0,3.0,,available,,gnPkJBhZh9R0UBqcfzdL
+Κουβερτου τα Γάλακτος,0,2.0,,available,,qZdpDyFbZ55nvuTwLhgE
+Κυβος λαχανικών,0,2.0,Groceries,available,1.0,wdZksr3XKOzqcwL9jK3W
+Κόκκινη σάλτσα,0,0.0,Groceries,available,1.0,dqcIhglHGeFFF48NtaB5
+Κύβος ζυμαρικών,0,3.5,,available,,Ff64pOOcFHFR7XqN3Jj6
+Κύβος κότας,0,2.0,Groceries,available,1.0,eTMz4kKXvkQJUtwI0ZoW
+Μοσχάρι 500g,0,5.0,Pantry,available,1.0,Ybmh8vtAnvpUZHgAYjsc
 Μπαταρίες μεγάλες,0,5.65,,available,,YEsyGkYgjn1HAstxPFVO
 Μπαταρίες μικρές,0,5.65,,available,,72o4Zt7hRQM8Bf1MzvlS
-Μπατονέτες,0,1,,available,,8RRRL5bghQaoTZH3jI0c
-Μπαχαρικά κότας,2,0,,available,,6NKlcSeoE4gmVoHtPCKy
+Μπατονέτες,0,1.0,,available,,8RRRL5bghQaoTZH3jI0c
+Μπαχαρικά κότας,2,0.0,,available,,6NKlcSeoE4gmVoHtPCKy
 Μωρομάντηλα,0,3.5,,available,,MbL42pq2pH0r2YWQU3CR
-Ντεπον,0,3,,available,,2uSbAq3qQcNfpyhDYjSh
-Νυχάκι,0,1.50,,available,,vYaM4uOToMksQretU9XT
-Ξεσκονόπανο,0,3,Groceries,available,1,AkhNNlcne6qggo2mW6dF
-Ξηρή μαγιά,0,1,,available,,FY7B9cSzdBzXQlx5qOZT
-Παγίδες χρώματος,0,6,Groceries,available,1,WqqCXMVNiSLsLg1ReFoV
-Παγωτό σοκολάτα,5208046258019,3.20,,available,,HB7k92NCPclI42mSDzvk
-Παρμεζάνα,0,2,Groceries,available,1,Qwaax1mushdN8YrImfKL
-Πατάτες baby,0,2,Groceries,available,1,isgMSL06qFPgr1Dz4kof
-Πατατοσαλάτα,0,4,,available,,JM1iD62oKTQZITdGKtxr
-Πλαστικό wrap,0,4,Groceries,available,1,lEcAzxsZeUpgiPMDSWoy
-Ποτό,0,25,Groceries,available,1,Ej4MyG9UvUqyc4i6jhHb
-Πουρές,0,1.20,,available,,ZCacplAuu063gyKqR1bK
-Ρόκα,0,2,Groceries,available,1,5eTGULqLXsxT7M5tckhx
-Σακούλες Σκούπας,0,4,,available,,vlch3S78xtrs8Njnxsk2
-Σαμπουάν για σώμα,0,4,,available,,Gs7dT6UESrF7t16dKq1F
-Σκόρδο αποξηραμένο,0,2,Groceries,available,1,kRRPltFVhaTegduqoFBJ
-Σοκολάτα,0,1.60,,available,,TmjgxDVbpyLtvFAsBoWO
-Σοκολάτα ρόφημα,0,3.00,,available,,Ogi0drmCmxX6nuqF2ijC
-Σως μουστάρδας,0,2,,available,,zk2qZoB43T4wMWcBKRh4
-Σως τονοσαλατας,0,2,Groceries,available,,bowg1aRYOFbTtrbdwWEE
-Τσίχλες,0,1.20,,available,,STS8H3JB5CzUeIwF0T2J
-Τυροκαφτερή,0,3,Groceries,available,1,d2O09XIrJGltUFm1mV1Z
-Χυμός λεμονιού,0,3,Groceries,available,1,VKifGxDyXcC4fEAfA84M
+Ντεπον,0,3.0,,available,,2uSbAq3qQcNfpyhDYjSh
+Νυχάκι,0,1.5,,available,,vYaM4uOToMksQretU9XT
+Ξεσκονόπανο,0,3.0,Groceries,available,1.0,AkhNNlcne6qggo2mW6dF
+Παγίδες χρώματος,0,6.0,Groceries,available,1.0,WqqCXMVNiSLsLg1ReFoV
+Παγωτό σοκολάτα,5208046258019,3.2,,available,,HB7k92NCPclI42mSDzvk
+Πατατοσαλάτα,0,4.0,,available,,JM1iD62oKTQZITdGKtxr
+Ποτό,0,25.0,Groceries,available,1.0,Ej4MyG9UvUqyc4i6jhHb
+Πουρές,0,1.2,,available,,ZCacplAuu063gyKqR1bK
+Ρόκα,0,2.0,Groceries,available,1.0,5eTGULqLXsxT7M5tckhx
+Σακούλες Σκούπας,0,4.0,,available,,vlch3S78xtrs8Njnxsk2
+Σαμπουάν για σώμα,0,4.0,,available,,Gs7dT6UESrF7t16dKq1F
+Σκόρδο αποξηραμένο,0,2.0,Groceries,available,1.0,kRRPltFVhaTegduqoFBJ
+Σοκολάτα,0,1.6,,available,,TmjgxDVbpyLtvFAsBoWO
+Σοκολάτα ρόφημα,0,3.0,,available,,Ogi0drmCmxX6nuqF2ijC
+Σως τονοσαλατας,0,2.0,Groceries,available,,bowg1aRYOFbTtrbdwWEE
+Τσίχλες,0,1.2,,available,,STS8H3JB5CzUeIwF0T2J
+Τυροκαφτερή,0,3.0,Groceries,available,1.0,d2O09XIrJGltUFm1mV1Z
+Χυμός λεμονιού,0,3.0,Groceries,available,1.0,VKifGxDyXcC4fEAfA84M

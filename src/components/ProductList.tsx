@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle } from "react";
+import React, { useEffect, useMemo, useState, forwardRef, useImperativeHandle } from "react";
 import { Product } from "@/types/Product";
 import { IconButton, Checkbox, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -92,7 +92,6 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
   const [animatingProducts, setAnimatingProducts] = useState<Set<string>>(
     new Set(),
   );
-  const modalRef = useRef<HTMLDivElement | null>(null);
 
   // Notify parent when checked count changes
   useEffect(() => {
@@ -132,29 +131,12 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
     getCheckedCount: () => checkedProducts.size,
   }));
 
-  useEffect(() => {
-    const handleClickOutside = (event: Event) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node)
-      ) {
-        setListModalOpen(false);
-      }
-    };
-
-    if (listModalOpen) {
-      document.addEventListener("pointerdown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("pointerdown", handleClickOutside);
-    };
-  }, [listModalOpen]);
-
   const closeListModalIfBackdrop = (
-    event: React.MouseEvent<HTMLDivElement> | React.PointerEvent<HTMLDivElement>,
+    event: React.MouseEvent<HTMLDivElement>,
   ) => {
     if (event.target === event.currentTarget) {
+      event.preventDefault();
+      event.stopPropagation();
       setListModalOpen(false);
     }
   };
@@ -347,13 +329,10 @@ const ProductList = forwardRef<ProductListHandle, ProductListProps>(({
       {listModalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-          onPointerDown={closeListModalIfBackdrop}
           onClick={closeListModalIfBackdrop}
         >
           <div
-            ref={modalRef}
             className="w-80 animate-fade-up rounded-2xl bg-white p-8 animate-duration-500 animate-once animate-ease-in-out"
-            onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between">
